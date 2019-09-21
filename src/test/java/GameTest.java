@@ -1,11 +1,14 @@
 import io.xive.wy.arcade.townstars.Game;
 import io.xive.wy.arcade.townstars.exceptions.GameException;
+import io.xive.wy.arcade.townstars.exceptions.GameFinishedException;
 import io.xive.wy.arcade.townstars.exceptions.NotEnoughtCurrencyException;
+import io.xive.wy.arcade.townstars.objects.Building;
 import io.xive.wy.arcade.townstars.objects.BuildingTune;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class GameTest {
 
@@ -72,6 +75,59 @@ public class GameTest {
     assertNotNull(buildingTune);
 
     game.build(buildingTune.getName());
+  }
+
+  @Test(expected = GameFinishedException.class)
+  public void checkGameFinish() throws GameException {
+    Game game = new Game();
+
+    game.skip(Game.GAME_DURATION);
+
+    BuildingTune buildingTune = null;
+    BuildingTune[] buildingTunes = game.getAllBuildingTunes();
+    for(int i=0; i<buildingTunes.length; i++) {
+      if (buildingTunes[i].getBuildCost() < game.getCurrency()) {
+        buildingTune = buildingTunes[i];
+        break;
+      }
+    }
+
+    assertTrue(game.isFinished());
+    game.build(buildingTune.getName());
+
+  }
+
+  @Test
+  public void checkGameTick() throws GameException {
+    Game game = new Game();
+
+    assertEquals(Game.START_CURRENCY, game.getCurrency());
+
+    long totalLabor = 0;
+    Building[] buildings = game.getBuildings();
+    for(int i=1; i<buildings.length; i++) {
+      if (buildings[i] != null) {
+        totalLabor += buildings[i].getLaborValue();
+      }
+    }
+
+    game.tick();
+    assertEquals(Game.START_CURRENCY, game.getCurrency());
+
+    game.skip(5000);
+    game.tick();
+    assertEquals(Game.START_CURRENCY, game.getCurrency());
+
+    game.skip(5000);
+    game.tick();
+    assertEquals(Game.START_CURRENCY - totalLabor, game.getCurrency());
+
+    game.skip(10000);
+    game.tick();
+    assertEquals(Game.START_CURRENCY - totalLabor * 2, game.getCurrency());
+
+
+
   }
 
 }

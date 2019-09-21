@@ -1,7 +1,6 @@
 package io.xive.wy.arcade.townstars.objects;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Building {
@@ -21,7 +20,7 @@ public class Building {
   private boolean isTradeDepot;
 
   /*** RUNTIME PROPERTIES ***/
-  public Date craftStart;
+  public long craftStartDate;
   public List<Craft> craftsInside;
 
   public String craftOutside;
@@ -30,8 +29,11 @@ public class Building {
 
   public List<Craft> consumeCrafts;
 
+  public long lastLaborDate;
+
   public Building(String name, long sellValue, long buildCost, long laborValue,
-                  String[] producesCrafts, boolean hasRequirementsMet, String[] storesCraftTypes, long storageCapacity, boolean isTradeDepot) {
+                  String[] producesCrafts, boolean hasRequirementsMet, String[] storesCraftTypes,
+                  long storageCapacity, boolean isTradeDepot, long gameDate) {
     this.name = name;
     this.buildCost = buildCost;
     this.sellValue = sellValue;
@@ -57,6 +59,8 @@ public class Building {
     if (this.isTradeDepot) {
       this.consumeCrafts = new ArrayList<>();
     }
+
+    this.lastLaborDate = gameDate;
 
   }
 
@@ -92,8 +96,8 @@ public class Building {
     return ignoreRequirements;
   }
 
-  public Date getCraftStart() {
-    return craftStart;
+  public long getCraftStartDate() {
+    return craftStartDate;
   }
 
   public boolean isTradeDepot() {
