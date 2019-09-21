@@ -14,9 +14,11 @@ import io.xive.wy.arcade.townstars.exceptions.NotEnoughtCurrencyException;
 import io.xive.wy.arcade.townstars.exceptions.NotMeetRequirements;
 import io.xive.wy.arcade.townstars.exceptions.OutputNotEmptyException;
 import io.xive.wy.arcade.townstars.exceptions.WrongCraftException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class Game {
 
@@ -36,6 +38,8 @@ public class Game {
   private long startDate;
   private long skippedMs;
 
+  private List<Craft> tradeCrafts;
+
   public Game() {
 
     this.objectsRepo = new ObjectsRepo();
@@ -46,6 +50,8 @@ public class Game {
     this.currency = START_CURRENCY;
     this.points = 0;
 
+    this.tradeCrafts = new ArrayList<>();
+
     this.buildings = new Building[257]; // Never access buildings[0]
     this.buildings[1] = newBuilding(objectsRepo.findBuildingTune("Wheat Field"));
     this.buildings[2] = newBuilding(objectsRepo.findBuildingTune("Wheat Field"));
@@ -53,6 +59,14 @@ public class Game {
     this.buildings[4] = newBuilding(objectsRepo.findBuildingTune("Well"));
     this.buildings[5] = newBuilding(objectsRepo.findBuildingTune("Silo"));
     this.buildings[6] = newBuilding(objectsRepo.findBuildingTune("Fuel Storage"));
+
+    for (int i=0; i<10; i++) {
+      this.buildings[5].storedCrafts.add(objectsRepo.findCraftTune("Wheat").newCraft());
+    }
+
+    for (int i=0; i<40; i++) {
+      this.buildings[6].storedCrafts.add(objectsRepo.findCraftTune("Gasoline").newCraft());
+    }
 
   }
 
@@ -62,6 +76,28 @@ public class Game {
                         buildingTune.getProducesCrafts(), buildingTune.isIgnoreRequirements(),
                         buildingTune.getStoresCraftTypes(), buildingTune.getStorageCapacity(),
                         buildingTune.isTradeDepot(), getGameDate());
+  }
+
+  private void checkOutputBuilding(Building building, Craft craft, int amount) throws NotEnoughCraftsException {
+    if (building.getStorageCapacity() > 0) {
+      if (Collections.frequency(building.storedCrafts, craft) < amount) {
+        throw new NotEnoughCraftsException();
+      }
+    } else if (amount > 1) {
+      throw new NotEnoughCraftsException();
+    } else {
+      if (building.craftOutside == null || !building.craftOutside.equals(craft)) {
+        throw new NotEnoughCraftsException();
+      }
+    }
+  }
+
+  private void popOutputBuilding(Building building, Craft craft, int amount) {
+    if (building.getStorageCapacity() > 0) {
+      for(int i=0; i<amount; i++) building.storedCrafts.remove(craft);
+    } else {
+      building.craftOutside = null;
+    }
   }
 
   /*** Helpers ***/
@@ -95,6 +131,10 @@ public class Game {
 
   public boolean isFinished() {
     return getGameDate() >= GAME_DURATION;
+  }
+
+  public Craft[] getTradeCrafts() {
+    return tradeCrafts.toArray(new Craft[0]);
   }
 
   public void tick() {
@@ -213,17 +253,7 @@ public class Game {
     if (craftTune == null) throw new CraftNotFoundException();
     Craft newCraft = craftTune.newCraft();
 
-    if (fromBuilding.getStorageCapacity() > 0) {
-      if (Collections.frequency(fromBuilding.storedCrafts, newCraft) < amount) {
-        throw new NotEnoughCraftsException();
-      }
-    } else if (amount > 1) {
-      throw new NotEnoughCraftsException();
-    } else {
-      if (fromBuilding.craftOutside == null || !fromBuilding.craftOutside.equals(newCraft)) {
-        throw new NotEnoughCraftsException();
-      }
-    }
+    checkOutputBuilding(fromBuilding, newCraft, amount);
 
     if (toBuilding.getStorageCapacity() > 0) {
       if (!Arrays.asList(toBuilding.getStoresCraftTypes()).contains(craftTune.getType()) &&
@@ -235,16 +265,32 @@ public class Game {
       }
     }
 
-    if (fromBuilding.getStorageCapacity() > 0) {
-      for(int i=0; i<amount; i++) fromBuilding.storedCrafts.remove(newCraft);
-    } else {
-      fromBuilding.craftOutside = null;
-    }
+    popOutputBuilding(fromBuilding, newCraft, 1);
 
     if (toBuilding.getStorageCapacity() > 0) {
-      for(int i=0; i<amount; i++) toBuilding.storedCrafts.add(newCraft);
+      for(int i=0; i<amount; i++) toBuilding.storedCrafts.add(craftTune.newCraft());
     } else {
-      for(int i=0; i<amount; i++) toBuilding.craftsInside.add(newCraft);
+      for(int i=0; i<amount; i++) toBuilding.craftsInside.add(craftTune.newCraft());
+    }
+
+  }
+
+  public void consume(int buildingIndex, String craftName, int amount) throws GameException {
+    tick();
+
+    Building building = getBuilding(buildingIndex);
+    if (building == null) throw new NoBuildingException();
+
+    CraftTune craftTune = objectsRepo.findCraftTune(craftName);
+    if (craftTune == null) throw new CraftNotFoundException();
+    Craft newCraft = craftTune.newCraft();
+
+    checkOutputBuilding(building, newCraft, amount);
+
+    popOutputBuilding(building, newCraft, amount);
+
+    for(int i=0; i<amount; i++) {
+      tradeCrafts.add(craftTune.newCraft());
     }
 
   }

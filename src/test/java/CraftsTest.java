@@ -111,6 +111,59 @@ public class CraftsTest {
 
   }
 
+  @Test(expected = NotEnoughCraftsException.class)
+  public void testConsumeNotEnough() throws GameException {
+    Game game = new Game();
+    game.craft(4, "Water");
+    assertNull(game.getBuilding(4).getCraftOutside());
 
+    game.skip(Game.BUILDING_CRAFT_PERIOD);
+    game.tick();
+
+    assertNotNull(game.getBuilding(4).getCraftOutside());
+    assertEquals("Water", game.getBuilding(4).getCraftOutside().getName());
+
+    game.consume(4, "Water", 10);
+  }
+
+  @Test(expected = NotEnoughCraftsException.class)
+  public void testConsumeNotEnough2() throws GameException {
+    Game game = new Game();
+
+    game.consume(5, "Wheat", 10);
+    game.consume(5, "Wheat", 10);
+  }
+
+  @Test
+  public void testConsume() throws GameException {
+    Game game = new Game();
+
+    for (int i=0; i<5; i++) {
+      game.craft(4, "Water");
+      assertNull(game.getBuilding(4).getCraftOutside());
+      game.skip(Game.BUILDING_CRAFT_PERIOD);
+      game.tick();
+      assertNotNull(game.getBuilding(4).getCraftOutside());
+      assertEquals("Water", game.getBuilding(4).getCraftOutside().getName());
+      game.store(4, 1, "Water", 1);
+
+      game.craft(4, "Water");
+      game.skip(Game.BUILDING_CRAFT_PERIOD);
+      game.store(4, 1, "Water", 1);
+
+      game.craft(4, "Water");
+      game.skip(Game.BUILDING_CRAFT_PERIOD);
+      game.store(4, 1, "Water", 1);
+
+      game.craft(1, "Wheat");
+      game.skip(Game.BUILDING_CRAFT_PERIOD);
+      game.tick();
+
+      game.store(1, 5, "Wheat", 1);
+
+    }
+
+    game.consume(5, "Wheat", 10);
+  }
 
 }
