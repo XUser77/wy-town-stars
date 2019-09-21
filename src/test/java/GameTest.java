@@ -1,9 +1,9 @@
-import io.xive.wy.arcade.townstars.Game;
+import io.xive.wy.arcade.townstars.game.Game;
 import io.xive.wy.arcade.townstars.exceptions.GameException;
 import io.xive.wy.arcade.townstars.exceptions.GameFinishedException;
 import io.xive.wy.arcade.townstars.exceptions.NotEnoughtCurrencyException;
-import io.xive.wy.arcade.townstars.objects.Building;
-import io.xive.wy.arcade.townstars.objects.BuildingTune;
+import io.xive.wy.arcade.townstars.game.Building;
+import io.xive.wy.arcade.townstars.game.BuildingTune;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -98,7 +98,7 @@ public class GameTest {
   }
 
   @Test
-  public void checkGameTick() throws GameException {
+  public void testGameTick() throws GameException {
     Game game = new Game();
 
     assertEquals(Game.START_CURRENCY, game.getCurrency());

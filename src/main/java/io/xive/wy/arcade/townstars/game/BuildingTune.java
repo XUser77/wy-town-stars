@@ -1,9 +1,6 @@
-package io.xive.wy.arcade.townstars.objects;
+package io.xive.wy.arcade.townstars.game;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Building {
+public class BuildingTune {
 
   /*** TUNING PROPERTIES ***/
   private String name;
@@ -19,21 +16,8 @@ public class Building {
 
   private boolean isTradeDepot;
 
-  /*** RUNTIME PROPERTIES ***/
-  public long craftStartDate;
-  public List<Craft> craftsInside;
-
-  public String craftOutside;
-
-  public List<Craft> storedCrafts;
-
-  public List<Craft> consumeCrafts;
-
-  public long lastLaborDate;
-
-  public Building(String name, long sellValue, long buildCost, long laborValue,
-                  String[] producesCrafts, boolean hasRequirementsMet, String[] storesCraftTypes,
-                  long storageCapacity, boolean isTradeDepot, long gameDate) {
+  public BuildingTune(String name, long sellValue, long buildCost, long laborValue,
+                  String[] producesCrafts, boolean hasRequirementsMet, String[] storesCraftTypes, long storageCapacity, boolean isTradeDepot) {
     this.name = name;
     this.buildCost = buildCost;
     this.sellValue = sellValue;
@@ -47,21 +31,6 @@ public class Building {
     this.ignoreRequirements = hasRequirementsMet;
 
     this.isTradeDepot = isTradeDepot;
-
-    if (this.storageCapacity > 0) {
-      this.storedCrafts = new ArrayList<>();
-    }
-
-    if (this.producesCrafts.length > 0) {
-      this.craftsInside = new ArrayList<>();
-    }
-
-    if (this.isTradeDepot) {
-      this.consumeCrafts = new ArrayList<>();
-    }
-
-    this.lastLaborDate = gameDate;
-
   }
 
   public String getName() {
@@ -94,10 +63,6 @@ public class Building {
 
   public boolean isIgnoreRequirements() {
     return ignoreRequirements;
-  }
-
-  public long getCraftStartDate() {
-    return craftStartDate;
   }
 
   public boolean isTradeDepot() {

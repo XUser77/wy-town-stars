@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e2d0785-50c6-4be3-a342-2add3985c5bf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Craft.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/objects/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/objects/Building.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/objects/Craft.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/objects/Craft.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/objects/CraftTune.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/objects/CraftTune.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/objects/ObjectsRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/io/xive/wy/arcade/townstars/objects/ObjectsRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/classes/GameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/classes/GameTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Building.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/BuildingTune.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/BuildingTune.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/BuildingTune.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Craft.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/CraftTune.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/CraftTune.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/CraftTune.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/ObjectsRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/ObjectsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/ObjectsRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GameTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -24,29 +40,35 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/Game.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="88" column="34" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="34" />
+            <state relative-caret-position="-2312">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
               <folding>
+                <element signature="e#2343#2344#0" expanded="true" />
                 <element signature="e#2394#2395#0" expanded="true" />
+                <element signature="e#2432#2433#0" expanded="true" />
                 <element signature="e#2458#2459#0" expanded="true" />
+                <element signature="e#2966#2967#0" expanded="true" />
+                <element signature="e#2999#3000#0" expanded="true" />
+                <element signature="e#2489#2490#0" expanded="true" />
                 <element signature="e#2514#2515#0" expanded="true" />
+                <element signature="e#2543#2544#0" expanded="true" />
                 <element signature="e#2566#2567#0" expanded="true" />
+                <element signature="e#2597#2598#0" expanded="true" />
                 <element signature="e#2658#2659#0" expanded="true" />
+                <element signature="e#2689#2690#0" expanded="true" />
                 <element signature="e#2719#2720#0" expanded="true" />
-                <element signature="e#3398#3399#0" expanded="true" />
-                <element signature="e#3445#3446#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/GameTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/CraftsTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="124" column="16" selection-start-line="124" selection-start-column="16" selection-end-line="124" selection-end-column="16" />
+            <state relative-caret-position="290">
+              <caret line="40" column="63" selection-start-line="40" selection-start-column="63" selection-end-line="40" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -55,29 +77,88 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/ObjectsRepo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/WrongCraftException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="46" column="37" lean-forward="true" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
+            <state relative-caret-position="34">
+              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/ObjectsRepo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#254#255#0" expanded="true" />
-                <element signature="e#279#280#0" expanded="true" />
-                <element signature="e#2229#2230#0" expanded="true" />
-                <element signature="e#2338#2339#0" expanded="true" />
+                <element signature="e#3359#3360#0" expanded="true" />
+                <element signature="e#3439#3440#0" expanded="true" />
+                <element signature="e#3490#3491#0" expanded="true" />
+                <element signature="e#3539#3540#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Building.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Building.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+            <state relative-caret-position="307">
+              <caret line="106" column="40" selection-start-line="106" selection-start-column="40" selection-end-line="106" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2333#2334#0" expanded="true" />
+                <element signature="e#2366#2367#0" expanded="true" />
+                <element signature="e#2391#2392#0" expanded="true" />
+                <element signature="e#2428#2429#0" expanded="true" />
+                <element signature="e#2457#2458#0" expanded="true" />
+                <element signature="e#2499#2500#0" expanded="true" />
+                <element signature="e#2528#2529#0" expanded="true" />
+                <element signature="e#2571#2572#0" expanded="true" />
+                <element signature="e#2601#2602#0" expanded="true" />
+                <element signature="e#2637#2638#0" expanded="true" />
+                <element signature="e#2667#2668#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/CraftTune.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+              <folding>
+                <element signature="e#1014#1015#0" expanded="true" />
+                <element signature="e#1063#1064#0" expanded="true" />
+                <element signature="e#1113#1114#0" expanded="true" />
+                <element signature="e#1142#1143#0" expanded="true" />
+                <element signature="e#1163#1164#0" expanded="true" />
+                <element signature="e#1195#1196#0" expanded="true" />
+                <element signature="e#1221#1222#0" expanded="true" />
+                <element signature="e#1260#1261#0" expanded="true" />
+                <element signature="e#1291#1292#0" expanded="true" />
+                <element signature="e#1334#1335#0" expanded="true" />
+                <element signature="e#1371#1372#0" expanded="true" />
+                <element signature="e#1410#1411#0" expanded="true" />
+                <element signature="e#1441#1442#0" expanded="true" />
+                <element signature="e#1484#1485#0" expanded="true" />
+                <element signature="e#1521#1522#0" expanded="true" />
+                <element signature="e#1560#1561#0" expanded="true" />
+                <element signature="e#1591#1592#0" expanded="true" />
+                <element signature="e#1634#1635#0" expanded="true" />
+                <element signature="e#1671#1672#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Craft.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -123,11 +204,25 @@
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/BuildingNotFoundException.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/GameException.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/NoBuildingException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/ObjectsRepo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Building.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/GameFinishedException.java" />
         <option value="$PROJECT_DIR$/src/test/java/GameTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/ObjectsRepo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/OutputNotEmptyException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/BuildingAlradeCraftingException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/BuildingAlradyCraftingException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/BuildingAlreadyCraftingException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/CraftNotFoundException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Craft.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/CraftTune.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/NotMeetRequirements.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/WrongBuildingCraftException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/WrongCraftException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Building.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/games/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Building.java" />
+        <option value="$PROJECT_DIR$/src/test/java/CraftsTest.java" />
       </list>
     </option>
   </component>
@@ -194,13 +289,20 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="townstars" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="town-stars" type="b2602c69:ProjectViewProjectNode" />
               <item name="town-stars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="town-stars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="town-stars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -212,7 +314,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569095241826" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569098376581" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -229,7 +331,15 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.CraftsTest">
+    <configuration name="CraftsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="io.xive.wy.arcade.town-stars.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CraftsTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="io.xive.wy.arcade.town-stars.test" />
       <option name="PACKAGE_NAME" value="" />
@@ -240,6 +350,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CraftsTest" />
         <item itemvalue="JUnit.GameTest" />
       </list>
     </recent_temporary>
@@ -254,44 +365,44 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1569079533018</updated>
-      <workItem from="1569079542341" duration="10881000" />
+      <workItem from="1569079542341" duration="13684000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GameTest - 2019.09.21 at 14h 43m 31s.xml">
+    <history-entry file="GameTest - 2019.09.21 at 14h 48m 18s.xml">
       <configuration name="GameTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 44m 03s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 28m 36s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 45m 07s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 29m 07s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 45m 18s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 29m 25s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 45m 40s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 29m 41s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 45m 53s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 30m 50s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 46m 08s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 32m 27s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 46m 43s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 36m 49s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 47m 00s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 37m 07s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2019.09.21 at 14h 47m 19s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="CraftsTest - 2019.09.21 at 15h 37m 17s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10881000" />
+    <option name="totallyTimeSpent" value="13684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -302,7 +413,7 @@
       <window_info id="Capture Tool" />
       <window_info id="UI Designer" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Build" weight="0.3286119" />
       <window_info anchor="bottom" id="Terminal" />
@@ -313,7 +424,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -374,21 +485,7 @@
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Craft.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/CraftTune.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/BuildingTune.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/BuildingTune.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
@@ -457,30 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/ObjectsRepo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="46" column="37" lean-forward="true" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#254#255#0" expanded="true" />
-            <element signature="e#279#280#0" expanded="true" />
-            <element signature="e#2229#2230#0" expanded="true" />
-            <element signature="e#2338#2339#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/objects/Building.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/GameFinishedException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -488,27 +561,145 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/ObjectsRepo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="88" column="34" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="34" />
+        <state relative-caret-position="272">
+          <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
           <folding>
-            <element signature="e#2394#2395#0" expanded="true" />
-            <element signature="e#2458#2459#0" expanded="true" />
-            <element signature="e#2514#2515#0" expanded="true" />
-            <element signature="e#2566#2567#0" expanded="true" />
-            <element signature="e#2658#2659#0" expanded="true" />
-            <element signature="e#2719#2720#0" expanded="true" />
-            <element signature="e#3398#3399#0" expanded="true" />
-            <element signature="e#3445#3446#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3359#3360#0" expanded="true" />
+            <element signature="e#3439#3440#0" expanded="true" />
+            <element signature="e#3490#3491#0" expanded="true" />
+            <element signature="e#3539#3540#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/OutputNotEmptyException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="58" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/BuildingAlreadyCraftingException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/CraftNotFoundException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="57" selection-start-line="2" selection-start-column="57" selection-end-line="2" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/CraftTune.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+          <folding>
+            <element signature="e#1014#1015#0" expanded="true" />
+            <element signature="e#1063#1064#0" expanded="true" />
+            <element signature="e#1113#1114#0" expanded="true" />
+            <element signature="e#1142#1143#0" expanded="true" />
+            <element signature="e#1163#1164#0" expanded="true" />
+            <element signature="e#1195#1196#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1291#1292#0" expanded="true" />
+            <element signature="e#1334#1335#0" expanded="true" />
+            <element signature="e#1371#1372#0" expanded="true" />
+            <element signature="e#1410#1411#0" expanded="true" />
+            <element signature="e#1441#1442#0" expanded="true" />
+            <element signature="e#1484#1485#0" expanded="true" />
+            <element signature="e#1521#1522#0" expanded="true" />
+            <element signature="e#1560#1561#0" expanded="true" />
+            <element signature="e#1591#1592#0" expanded="true" />
+            <element signature="e#1634#1635#0" expanded="true" />
+            <element signature="e#1671#1672#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Craft.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/NotMeetRequirements.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="54" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/WrongCraftException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/GameTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="124" column="16" selection-start-line="124" selection-start-column="16" selection-end-line="124" selection-end-column="16" />
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="8" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2312">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="e#2343#2344#0" expanded="true" />
+            <element signature="e#2394#2395#0" expanded="true" />
+            <element signature="e#2432#2433#0" expanded="true" />
+            <element signature="e#2458#2459#0" expanded="true" />
+            <element signature="e#2966#2967#0" expanded="true" />
+            <element signature="e#2999#3000#0" expanded="true" />
+            <element signature="e#2489#2490#0" expanded="true" />
+            <element signature="e#2514#2515#0" expanded="true" />
+            <element signature="e#2543#2544#0" expanded="true" />
+            <element signature="e#2566#2567#0" expanded="true" />
+            <element signature="e#2597#2598#0" expanded="true" />
+            <element signature="e#2658#2659#0" expanded="true" />
+            <element signature="e#2689#2690#0" expanded="true" />
+            <element signature="e#2719#2720#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Building.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="106" column="40" selection-start-line="106" selection-start-column="40" selection-end-line="106" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2333#2334#0" expanded="true" />
+            <element signature="e#2366#2367#0" expanded="true" />
+            <element signature="e#2391#2392#0" expanded="true" />
+            <element signature="e#2428#2429#0" expanded="true" />
+            <element signature="e#2457#2458#0" expanded="true" />
+            <element signature="e#2499#2500#0" expanded="true" />
+            <element signature="e#2528#2529#0" expanded="true" />
+            <element signature="e#2571#2572#0" expanded="true" />
+            <element signature="e#2601#2602#0" expanded="true" />
+            <element signature="e#2637#2638#0" expanded="true" />
+            <element signature="e#2667#2668#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/CraftsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="40" column="63" selection-start-line="40" selection-start-column="63" selection-end-line="40" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

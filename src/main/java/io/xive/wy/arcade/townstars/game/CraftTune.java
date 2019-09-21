@@ -1,4 +1,4 @@
-package io.xive.wy.arcade.townstars.objects;
+package io.xive.wy.arcade.townstars.game;
 
 public class CraftTune {
 
@@ -34,9 +34,43 @@ public class CraftTune {
   }
 
   public Craft newCraft() {
-    return new Craft(name, type, cityPrice,
-                     craftRequired1, craftRequiredAmount1, craftRequired2, craftRequiredAmount2,
-                     craftRequired3, craftRequiredAmount3);
+    return new Craft(name, type, cityPrice);
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public long getCityPrice() {
+    return cityPrice;
+  }
+
+  public String getCraftRequired1() {
+    return craftRequired1;
+  }
+
+  public long getCraftRequiredAmount1() {
+    return craftRequiredAmount1;
+  }
+
+  public String getCraftRequired2() {
+    return craftRequired2;
+  }
+
+  public long getCraftRequiredAmount2() {
+    return craftRequiredAmount2;
+  }
+
+  public String getCraftRequired3() {
+    return craftRequired3;
+  }
+
+  public long getCraftRequiredAmount3() {
+    return craftRequiredAmount3;
   }
 
 }
