@@ -1,3 +1,4 @@
+import io.xive.wy.arcade.townstars.exceptions.InvalidStorageException;
 import io.xive.wy.arcade.townstars.exceptions.NotEnoughCraftsException;
 import io.xive.wy.arcade.townstars.exceptions.OutputNotEmptyException;
 import io.xive.wy.arcade.townstars.game.Game;
@@ -60,6 +61,21 @@ public class CraftsTest {
     assertEquals("Water", game.getBuilding(4).getCraftOutside().getName());
 
     game.store(4, 1, "Water", 2);
+  }
+
+  @Test(expected = InvalidStorageException.class)
+  public void testInvalidStorage() throws GameException {
+    Game game = new Game();
+    game.craft(4, "Water");
+    assertNull(game.getBuilding(4).getCraftOutside());
+
+    game.skip(Game.BUILDING_CRAFT_PERIOD);
+    game.tick();
+
+    assertNotNull(game.getBuilding(4).getCraftOutside());
+    assertEquals("Water", game.getBuilding(4).getCraftOutside().getName());
+
+    game.store(4, 5, "Water", 1);
   }
 
   @Test
