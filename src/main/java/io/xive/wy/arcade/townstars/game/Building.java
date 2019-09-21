@@ -22,8 +22,8 @@ public class Building {
   /*** RUNTIME PROPERTIES ***/
   protected Long craftStartDate;
   protected List<Craft> craftsInside;
-  protected String crafting;
-  protected String craftOutside;
+  protected Craft crafting;
+  protected Craft craftOutside;
 
   protected List<Craft> storedCrafts;
 
@@ -104,24 +104,24 @@ public class Building {
     return isTradeDepot;
   }
 
-  public List<Craft> getCraftsInside() {
-    return craftsInside;
+  public Craft[] getCraftsInside() {
+    return craftsInside.toArray(new Craft[0]);
   }
 
-  public String getCrafting() {
+  public Craft getCrafting() {
     return crafting;
   }
 
-  public String getCraftOutside() {
+  public Craft getCraftOutside() {
     return craftOutside;
   }
 
-  public List<Craft> getStoredCrafts() {
-    return storedCrafts;
+  public Craft[] getStoredCrafts() {
+    return storedCrafts.toArray(new Craft[0]);
   }
 
-  public List<Craft> getConsumeCrafts() {
-    return consumeCrafts;
+  public Craft[] getConsumeCrafts() {
+    return consumeCrafts.toArray(new Craft[0]);
   }
 
   public long getLastLaborDate() {

@@ -14,4 +14,24 @@ public class Craft {
 
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Craft) {
+      return this.name.equals(((Craft)obj).name);
+    }
+    return false;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public long getCityPrice() {
+    return cityPrice;
+  }
+
 }

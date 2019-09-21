@@ -5,8 +5,11 @@ import io.xive.wy.arcade.townstars.exceptions.BuildingNotFoundException;
 import io.xive.wy.arcade.townstars.exceptions.CraftNotFoundException;
 import io.xive.wy.arcade.townstars.exceptions.GameException;
 import io.xive.wy.arcade.townstars.exceptions.GameFinishedException;
+import io.xive.wy.arcade.townstars.exceptions.InvalidStorageException;
 import io.xive.wy.arcade.townstars.exceptions.NoBuildingException;
 import io.xive.wy.arcade.townstars.exceptions.NoSpaceException;
+import io.xive.wy.arcade.townstars.exceptions.NotEnoughCraftsException;
+import io.xive.wy.arcade.townstars.exceptions.NotEnoughSpaceException;
 import io.xive.wy.arcade.townstars.exceptions.NotEnoughtCurrencyException;
 import io.xive.wy.arcade.townstars.exceptions.NotMeetRequirements;
 import io.xive.wy.arcade.townstars.exceptions.OutputNotEmptyException;
@@ -167,27 +170,83 @@ public class Game {
 
     CraftTune craftTune = objectsRepo.findCraftTune(craftName);
     if (craftTune == null) throw new CraftNotFoundException();
+    Craft newCraft = craftTune.newCraft();
 
     if (!building.isIgnoreRequirements()) {
-      if (craftTune.getCraftRequired1() != null &&
-          Collections.frequency(building.craftsInside, craftTune.getName()) < craftTune.getCraftRequiredAmount1()) {
-        throw new NotMeetRequirements();
+
+      if (craftTune.getCraftRequired1() != null) {
+        Craft inCraft = objectsRepo.findCraftTune(craftTune.getCraftRequired1()).newCraft();
+        if (Collections.frequency(building.craftsInside, inCraft) < craftTune.getCraftRequiredAmount1()) {
+          throw new NotMeetRequirements();
+        }
       }
-      if (craftTune.getCraftRequired2() != null &&
-          Collections.frequency(building.craftsInside, craftTune.getName()) < craftTune.getCraftRequiredAmount2()) {
-        throw new NotMeetRequirements();
+
+      if (craftTune.getCraftRequired2() != null) {
+        Craft inCraft = objectsRepo.findCraftTune(craftTune.getCraftRequired2()).newCraft();
+        if (Collections.frequency(building.craftsInside, inCraft) < craftTune.getCraftRequiredAmount2()) {
+          throw new NotMeetRequirements();
+        }
       }
-      if (craftTune.getCraftRequired3() != null &&
-          Collections.frequency(building.craftsInside, craftTune.getName()) < craftTune.getCraftRequiredAmount3()) {
-        throw new NotMeetRequirements();
+
+      if (craftTune.getCraftRequired3() != null) {
+        Craft inCraft = objectsRepo.findCraftTune(craftTune.getCraftRequired3()).newCraft();
+        if (Collections.frequency(building.craftsInside, inCraft) < craftTune.getCraftRequiredAmount3()) {
+          throw new NotMeetRequirements();
+        }
       }
     }
 
     building.craftStartDate = getGameDate();
-    building.crafting = craftTune.getName();
+    building.crafting = newCraft;
 
   }
 
+  public void store(int fromIndex, int toIndex, String craftName, int amount) throws GameException {
+    tick();
+    Building fromBuilding = getBuilding(fromIndex);
+    if (fromBuilding == null) throw new BuildingNotFoundException();
 
+    Building toBuilding = getBuilding(toIndex);
+    if (toBuilding == null) throw new BuildingNotFoundException();
+
+    CraftTune craftTune = objectsRepo.findCraftTune(craftName);
+    if (craftTune == null) throw new CraftNotFoundException();
+    Craft newCraft = craftTune.newCraft();
+
+    if (fromBuilding.getStorageCapacity() > 0) {
+      if (Collections.frequency(fromBuilding.storedCrafts, newCraft) < amount) {
+        throw new NotEnoughCraftsException();
+      }
+    } else if (amount > 1) {
+      throw new NotEnoughCraftsException();
+    } else {
+      if (fromBuilding.craftOutside == null || !fromBuilding.craftOutside.equals(newCraft)) {
+        throw new NotEnoughCraftsException();
+      }
+    }
+
+    if (toBuilding.getStorageCapacity() > 0) {
+      if (!Arrays.asList(toBuilding.getStoresCraftTypes()).contains(craftTune.getType()) &&
+          !Arrays.asList(toBuilding.getStoresCraftTypes()).contains(craftTune.getName())) {
+        throw new InvalidStorageException();
+      }
+      if (toBuilding.storedCrafts.size() + amount > toBuilding.getStorageCapacity()) {
+        throw new NotEnoughSpaceException();
+      }
+    }
+
+    if (fromBuilding.getStorageCapacity() > 0) {
+      for(int i=0; i<amount; i++) fromBuilding.storedCrafts.remove(newCraft);
+    } else {
+      fromBuilding.craftOutside = null;
+    }
+
+    if (toBuilding.getStorageCapacity() > 0) {
+      for(int i=0; i<amount; i++) toBuilding.storedCrafts.add(newCraft);
+    } else {
+      for(int i=0; i<amount; i++) toBuilding.craftsInside.add(newCraft);
+    }
+
+  }
 
 }
