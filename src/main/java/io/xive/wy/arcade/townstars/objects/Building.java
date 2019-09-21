@@ -1,6 +1,5 @@
-package io.xive.wy.arcade.townstars.buildings;
+package io.xive.wy.arcade.townstars.objects;
 
-import io.xive.wy.arcade.townstars.crafts.Craft;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

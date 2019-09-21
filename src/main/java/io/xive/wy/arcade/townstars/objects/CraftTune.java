@@ -1,6 +1,6 @@
-package io.xive.wy.arcade.townstars.crafts;
+package io.xive.wy.arcade.townstars.objects;
 
-public class Craft {
+public class CraftTune {
 
   private String name;
   private String type;
@@ -15,7 +15,7 @@ public class Craft {
   private String craftRequired3;
   private long craftRequiredAmount3;
 
-  public Craft(String name, String type, long cityPrice,
+  public CraftTune(String name, String type, long cityPrice,
                String craftRequired1, long craftRequiredAmount1,
                String craftRequired2, long craftRequiredAmount2,
                String craftRequired3, long craftRequiredAmount3) {
@@ -31,6 +31,12 @@ public class Craft {
     this.craftRequired3 = craftRequired3;
     this.craftRequiredAmount3 = craftRequiredAmount3;
 
+  }
+
+  public Craft newCraft() {
+    return new Craft(name, type, cityPrice,
+                     craftRequired1, craftRequiredAmount1, craftRequired2, craftRequiredAmount2,
+                     craftRequired3, craftRequiredAmount3);
   }
 
 }
