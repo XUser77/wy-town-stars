@@ -11,6 +11,9 @@ import io.xive.wy.arcade.townstars.objects.ObjectsRepo;
 
 public class Game {
 
+  public static final long START_CURRENCY = 25000;
+  public static final long START_POINTS = 0;
+
   private long currency;
   private long points;
 
@@ -22,7 +25,7 @@ public class Game {
 
     this.objectsRepo = new ObjectsRepo();
 
-    this.currency = 25000;
+    this.currency = START_CURRENCY;
     this.points = 0;
 
     this.buildings = new Building[257]; // Never access buildings[0]
@@ -52,8 +55,16 @@ public class Game {
     return buildings;
   }
 
+  public long getCurrency() {
+    return currency;
+  }
+
+  public long getPoints() {
+    return points;
+  }
+
   /*** GAME ACTIONS ***/
-  public void build(String buildingName) throws GameException {
+  public int build(String buildingName) throws GameException {
     BuildingTune buildingTune = objectsRepo.findBuildingTune(buildingName);
 
     if (buildingTune == null) throw new BuildingNotFoundException();
@@ -72,6 +83,7 @@ public class Game {
     currency -= buildingTune.getBuildCost();
     buildings[freeIndex] = newBuilding(buildingTune);
 
+    return freeIndex;
   }
 
   public void sell(int index) throws GameException {
