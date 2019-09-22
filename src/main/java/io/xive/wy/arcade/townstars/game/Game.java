@@ -25,7 +25,7 @@ public class Game {
 
   public static final long START_CURRENCY = 25000;
   public static final long START_POINTS = 0;
-  public static final long GAME_DURATION = 6 * 60 * 60 * 1000;
+  public static final long GAME_DURATION = 5 * 60 * 60 * 1000;
   public static final long BUILDING_LABOR_PERIOD = 10 * 1000;
   public static final long BUILDING_CRAFT_PERIOD = 60 * 1000;
   public static final long BUILDING_TRADE_PERIOD = 2 * 60 * 1000;
@@ -227,6 +227,8 @@ public class Game {
 
   public void craft(int buildingIndex, String craftName) throws GameException {
     tick();
+    if (isFinished()) throw new GameFinishedException();
+
     Building building = buildings[buildingIndex];
     if (building == null) throw new NoBuildingException();
 
@@ -275,6 +277,8 @@ public class Game {
 
   public void store(int fromIndex, int toIndex, String craftName, int amount) throws GameException {
     tick();
+    if (isFinished()) throw new GameFinishedException();
+
     Building fromBuilding = getBuilding(fromIndex);
     if (fromBuilding == null) throw new BuildingNotFoundException();
 
@@ -313,6 +317,7 @@ public class Game {
 
   public void consume(int buildingIndex, String craftName, int amount) throws GameException {
     tick();
+    if (isFinished()) throw new GameFinishedException();
 
     Building building = getBuilding(buildingIndex);
     if (building == null) throw new NoBuildingException();
@@ -335,6 +340,7 @@ public class Game {
 
   public void trade(int buildingIndex, String craftName) throws GameException {
     tick();
+    if (isFinished()) throw new GameFinishedException();
 
     Building building = getBuilding(buildingIndex);
     if (building == null) throw new BuildingNotFoundException();

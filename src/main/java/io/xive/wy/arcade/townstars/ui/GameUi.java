@@ -5,12 +5,15 @@ import io.xive.wy.arcade.townstars.game.Building;
 import io.xive.wy.arcade.townstars.game.BuildingTune;
 import io.xive.wy.arcade.townstars.game.Craft;
 import io.xive.wy.arcade.townstars.game.Game;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -21,8 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
@@ -38,6 +43,29 @@ public class GameUi extends JFrame {
 
   public GameUi() {
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    setLayout( new BorderLayout() );
+    JPanel jPanel = new JPanel();
+    jPanel.setLayout(new java.awt.GridLayout(1, 0));
+
+    JButton jButton = new JButton("New game");
+    jButton.addActionListener(e -> newGame());
+    jPanel.add(jButton);
+
+    jButton = new JButton("Skip 10 sec");
+    jButton.addActionListener(e -> game.skip(10 * 1000));
+    jPanel.add(jButton);
+
+    jButton = new JButton("Skip 60 sec");
+    jButton.addActionListener(e -> game.skip(60 * 1000));
+    jPanel.add(jButton);
+
+    jButton = new JButton("Skip 10 min");
+    jButton.addActionListener(e -> game.skip(10 * 60 * 1000));
+    jPanel.add(jButton);
+
+
+    add(jPanel, BorderLayout.NORTH);
 
     int imageHeight = topLine + topLineMarginBottom + 16 * (fieldSize + borderWidth) + borderWidth + paddingY * 2;
 
@@ -61,6 +89,7 @@ public class GameUi extends JFrame {
           e.printStackTrace();
         }
       }
+      repaintGame();
     }).start();
 
     addMouseMotionListener(new MouseMotionListener() {
@@ -72,7 +101,7 @@ public class GameUi extends JFrame {
       @Override
       public void mouseMoved(MouseEvent e) {
         int imX = e.getX() - (getWidth() / 2 - bufferedImage.getWidth() / 2);
-        int imY = e.getY() - 50;
+        int imY = e.getY() - imageTopOffset;
 
         if (imX > paddingX && imX < bufferedImage.getWidth() - paddingX &&
             imY > topLine + topLineMarginBottom) {
@@ -178,6 +207,8 @@ public class GameUi extends JFrame {
   private int topLine = topFontSize * 4;
   private int topLineMarginBottom = buildingFontSize;
 
+  private int imageTopOffset = 100;
+
   private int mouseFieldX = -1;
   private int mouseFieldY = -1;
 
@@ -189,6 +220,10 @@ public class GameUi extends JFrame {
       repaintImage();
       repaint();
     }
+  }
+
+  private void newGame() {
+    game = new Game();
   }
 
   private String getTimeString(long timestamp) {
@@ -309,7 +344,7 @@ public class GameUi extends JFrame {
   @Override
   public void paint(Graphics g) {
 
-    g.drawImage(bufferedImage, getWidth() / 2 - bufferedImage.getWidth() / 2,50, null);
+    g.drawImage(bufferedImage, getWidth() / 2 - bufferedImage.getWidth() / 2,imageTopOffset, null);
   }
 
   public static String groupCrafts(Craft[] crafts) {
