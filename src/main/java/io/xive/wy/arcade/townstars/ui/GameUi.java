@@ -19,12 +19,23 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -50,6 +61,20 @@ public class GameUi extends JFrame {
 
     JButton jButton = new JButton("New game");
     jButton.addActionListener(e -> newGame());
+    jPanel.add(jButton);
+
+    jButton = new JButton("Import/check ledger");
+    jButton.addActionListener(e -> importLedger());
+    jPanel.add(jButton);
+
+    jButton = new JButton("Save ledger");
+    jButton.addActionListener(e -> {
+      try {
+        saveLedger();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
+    });
     jPanel.add(jButton);
 
     jButton = new JButton("Skip 10 sec");
@@ -214,6 +239,69 @@ public class GameUi extends JFrame {
 
   private Game game;
   private final BufferedImage bufferedImage;
+
+  private void importLedger() {
+    JFileChooser fc = new JFileChooser();
+    int returnValue = fc.showOpenDialog(this);
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+      File file = fc.getSelectedFile();
+      try {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        String line;
+        long prevTimestamp = -1;
+        game = new Game();
+        while ((line = bufferedReader.readLine()) != null) {
+          String[] ar = line.split(",", -1);
+          long timestamp = Long.parseLong(ar[0]);
+          String action = ar[1];
+          String item = ar[2];
+          Integer fromIndex = ar[3].length() > 0 ? Integer.parseInt(ar[3]) : null;
+          Integer toIndex = ar[4].length() > 0 ? Integer.parseInt(ar[4]) : null;
+          Integer amount = ar[5].length() > 0 ? Integer.parseInt(ar[5]) : null;
+
+          if (prevTimestamp > -1) game.skip(timestamp - prevTimestamp);
+
+          if (action.equals("BUILD")) {
+            game.build(item);
+          } else if (action.equals("SELL")) {
+            game.sell(fromIndex);
+          } else if (action.equals("CRAFT")) {
+            game.craft(toIndex, item);
+          } else if (action.equals("STORE")) {
+            game.store(fromIndex, toIndex, item, 1);
+          } else if (action.equals("CONSUME")) {
+            game.consume(fromIndex, item, amount);
+          } else if (action.equals("TRADE")) {
+            game.trade(fromIndex, item);
+          }
+
+          prevTimestamp = timestamp;
+
+        }
+      } catch (GameException ge) {
+        JOptionPane.showMessageDialog(this, "Game ledger contains errors or cheats: " + ge.getMessage());
+        ge.printStackTrace();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Import error: " + e.toString());
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private void saveLedger() throws IOException {
+    String ledger = game.compileLedger();
+
+    JFileChooser fc = new JFileChooser();
+    int returnValue = fc.showSaveDialog(this);
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+      File file = fc.getSelectedFile();
+      PrintWriter printWriter = new PrintWriter(new FileWriter(file));
+      printWriter.print(ledger);
+      printWriter.close();
+      JOptionPane.showMessageDialog(this, "Ledger saved to \"" + file.getName() + "\"");
+    }
+
+  }
 
   private void repaintGame() {
     synchronized (bufferedImage) {

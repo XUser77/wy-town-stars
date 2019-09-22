@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e2d0785-50c6-4be3-a342-2add3985c5bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/GameUi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/GameUi.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="230" column="4" selection-start-line="230" selection-start-column="4" selection-end-line="230" selection-end-column="4" />
+            <state relative-caret-position="417">
+              <caret line="208" column="13" selection-start-line="208" selection-start-column="7" selection-end-line="208" selection-end-column="13" />
               <folding>
                 <element signature="e#4530#4531#0" expanded="true" />
                 <element signature="e#4581#4582#0" expanded="true" />
@@ -50,15 +49,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/GameUi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+            <state relative-caret-position="261">
+              <caret line="271" column="48" lean-forward="true" selection-start-line="271" selection-start-column="48" selection-end-line="271" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6943#6944#0" expanded="true" />
-                <element signature="e#6970#6971#0" expanded="true" />
+                <element signature="e#10393#10394#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,6 +101,8 @@
       <find>getHe</find>
       <find>getMessa</find>
       <find>getMessage</find>
+      <find>lenger</find>
+      <find>ledger</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -161,8 +161,8 @@
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/WrongCraftException.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/BuildingsList.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/BuildingActions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/GameUi.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/GameUi.java" />
       </list>
     </option>
   </component>
@@ -217,15 +217,6 @@
               <item name="town-stars" type="b2602c69:ProjectViewProjectNode" />
               <item name="town-stars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="townstars" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="town-stars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="town-stars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
@@ -245,7 +236,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569130613496" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569132280730" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -328,7 +319,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1569079533018</updated>
-      <workItem from="1569079542341" duration="37011000" />
+      <workItem from="1569079542341" duration="38674000" />
     </task>
     <servers />
   </component>
@@ -365,7 +356,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37011000" />
+    <option name="totallyTimeSpent" value="38674000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -834,16 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/BuildingsList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/BuildingActions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="86">
@@ -854,22 +835,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/GameUi.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/BuildingsList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+        <state relative-caret-position="374">
+          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6943#6944#0" expanded="true" />
-            <element signature="e#6970#6971#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="230" column="4" selection-start-line="230" selection-start-column="4" selection-end-line="230" selection-end-column="4" />
+        <state relative-caret-position="417">
+          <caret line="208" column="13" selection-start-line="208" selection-start-column="7" selection-end-line="208" selection-end-column="13" />
           <folding>
             <element signature="e#4530#4531#0" expanded="true" />
             <element signature="e#4581#4582#0" expanded="true" />
@@ -889,6 +868,28 @@
             <element signature="e#5063#5064#0" expanded="true" />
             <element signature="e#5100#5101#0" expanded="true" />
             <element signature="e#5150#5151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/Program Files/Java/jdk1.8.0_25/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1510">
+          <caret line="2407" column="20" selection-start-line="2407" selection-start-column="20" selection-end-line="2407" selection-end-column="20" />
+          <folding>
+            <element signature="e#94239#94240#0" expanded="true" />
+            <element signature="e#94277#94278#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/ui/GameUi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="271" column="48" lean-forward="true" selection-start-line="271" selection-start-column="48" selection-end-line="271" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10393#10394#0" expanded="true" />
           </folding>
         </state>
       </provider>
