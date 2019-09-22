@@ -29,9 +29,12 @@ public class Building {
 
   protected List<Craft> consumeCrafts;
 
-  public long lastLaborDate;
+  protected long lastLaborDate;
 
-  public Building(String name, long sellValue, long buildCost, long laborValue,
+  protected Craft tradeCraft;
+  protected Long tradeStartDate;
+
+  protected Building(String name, long sellValue, long buildCost, long laborValue,
                   String[] producesCrafts, boolean hasRequirementsMet, String[] storesCraftTypes,
                   long storageCapacity, boolean isTradeDepot, long gameDate) {
     this.name = name;
@@ -126,6 +129,14 @@ public class Building {
 
   public long getLastLaborDate() {
     return lastLaborDate;
+  }
+
+  public Craft getTradeCraft() {
+    return tradeCraft;
+  }
+
+  public Long getTradeStartDate() {
+    return tradeStartDate;
   }
 
 }

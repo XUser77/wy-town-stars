@@ -1,6 +1,8 @@
 import io.xive.wy.arcade.townstars.exceptions.InvalidStorageException;
 import io.xive.wy.arcade.townstars.exceptions.NotEnoughCraftsException;
 import io.xive.wy.arcade.townstars.exceptions.OutputNotEmptyException;
+import io.xive.wy.arcade.townstars.game.Building;
+import io.xive.wy.arcade.townstars.game.CraftTune;
 import io.xive.wy.arcade.townstars.game.Game;
 import io.xive.wy.arcade.townstars.exceptions.BuildingAlreadyCraftingException;
 import io.xive.wy.arcade.townstars.exceptions.GameException;
@@ -164,6 +166,47 @@ public class CraftsTest {
     }
 
     game.consume(5, "Wheat", 10);
+    assertEquals(10, game.getTradeCrafts().length);
+
+
+  }
+
+  @Test(expected = NotEnoughCraftsException.class)
+  public void testTradeNotEnough2() throws GameException {
+    Game game = new Game();
+
+    game.consume(5, "Wheat", 5);
+    game.consume(6, "Gasoline", 1);
+    game.trade(3, "Wheat");
+  }
+
+  @Test
+  public void testTrade() throws GameException {
+    Game game = new Game();
+
+    game.consume(5, "Wheat", 10);
+    game.consume(6, "Gasoline", 1);
+    game.trade(3, "Wheat");
+
+    assertEquals(Game.START_CURRENCY, game.getCurrency());
+    long craftPrice = game.getBuilding(3).getTradeCraft().getCityPrice();
+    game.skip(Game.BUILDING_TRADE_PERIOD);
+    game.tick();
+
+    long totalLabor = 0;
+    Building[] buildings = game.getBuildings();
+    for(int i=1; i<buildings.length; i++) {
+      if (buildings[i] != null) {
+        totalLabor += buildings[i].getLaborValue();
+      }
+    }
+
+    long spendCurrency = totalLabor * (game.getGameDate() / Game.BUILDING_LABOR_PERIOD);
+
+    assertEquals(Game.START_CURRENCY - spendCurrency + craftPrice * 10, game.getCurrency());
+    assertNull(game.getBuilding(3).getTradeCraft());
+    assertNull(game.getBuilding(3).getTradeStartDate());
+
   }
 
 }

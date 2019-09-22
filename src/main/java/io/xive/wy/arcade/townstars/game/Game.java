@@ -1,6 +1,7 @@
 package io.xive.wy.arcade.townstars.game;
 
 import io.xive.wy.arcade.townstars.exceptions.BuildingAlreadyCraftingException;
+import io.xive.wy.arcade.townstars.exceptions.BuildingAlreadyTradingException;
 import io.xive.wy.arcade.townstars.exceptions.BuildingNotFoundException;
 import io.xive.wy.arcade.townstars.exceptions.CraftNotFoundException;
 import io.xive.wy.arcade.townstars.exceptions.GameException;
@@ -16,6 +17,7 @@ import io.xive.wy.arcade.townstars.exceptions.OutputNotEmptyException;
 import io.xive.wy.arcade.townstars.exceptions.WrongCraftException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ public class Game {
   public static final long GAME_DURATION = 6 * 60 * 60 * 1000;
   public static final long BUILDING_LABOR_PERIOD = 10 * 1000;
   public static final long BUILDING_CRAFT_PERIOD = 60 * 1000;
+  public static final long BUILDING_TRADE_PERIOD = 2 * 60 * 1000;
 
   private long currency;
   private long points;
@@ -154,6 +157,15 @@ public class Game {
           buildings[i].craftsInside.clear();
           buildings[i].craftStartDate = null;
           buildings[i].crafting = null;
+        }
+      }
+
+      if (buildings[i].tradeStartDate != null && gameDate - buildings[i].tradeStartDate >= BUILDING_TRADE_PERIOD) {
+        synchronized (buildings[i]) {
+          currency += buildings[i].tradeCraft.getCityPrice() * 10;
+          points += Math.min(1, buildings[i].tradeCraft.getCityPrice() * 10 / 1000);
+          buildings[i].tradeCraft = null;
+          buildings[i].tradeStartDate = null;
         }
       }
 
@@ -292,6 +304,39 @@ public class Game {
     for(int i=0; i<amount; i++) {
       tradeCrafts.add(craftTune.newCraft());
     }
+
+  }
+
+  public void trade(int buildingIndex, String craftName) throws GameException {
+    tick();
+
+    Building building = getBuilding(buildingIndex);
+    if (building == null) throw new BuildingNotFoundException();
+
+    CraftTune craftTune = objectsRepo.findCraftTune(craftName);
+    if (craftTune == null) throw new CraftNotFoundException();
+    Craft newCraft = craftTune.newCraft();
+
+    if (Collections.frequency(tradeCrafts, newCraft) < 10) {
+      throw new NotEnoughCraftsException();
+    }
+
+    if (!tradeCrafts.contains(objectsRepo.findCraftTune("Gasoline").newCraft())) {
+      throw new NotEnoughCraftsException();
+    }
+
+    if (building.tradeStartDate != null) {
+      throw new BuildingAlreadyTradingException();
+    }
+
+    for(int i=0; i<10; i++) {
+      tradeCrafts.remove(newCraft);
+    }
+
+    tradeCrafts.remove(objectsRepo.findCraftTune("Gasoline").newCraft());
+
+    building.tradeStartDate = getGameDate();
+    building.tradeCraft = newCraft;
 
   }
 
