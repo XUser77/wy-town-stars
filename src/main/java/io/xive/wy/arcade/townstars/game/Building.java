@@ -111,7 +111,7 @@ public class Building {
     return ignoreRequirements;
   }
 
-  public long getCraftStartDate() {
+  public Long getCraftStartDate() {
     return craftStartDate;
   }
 

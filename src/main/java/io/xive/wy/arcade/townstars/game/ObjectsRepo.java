@@ -51,7 +51,7 @@ public class ObjectsRepo {
     buildingTuneMap.put("Steel Mill",
                         new BuildingTune("Steel Mill", 75000, 100000, 150,
                                       new String[] {"Steel", "Blue Steel"}, false,
-                                      new String[0], 40, false));
+                                      new String[0], 0, false));
 
     List<BuildingTune> buildingTunes = new ArrayList<>();
     for(Entry<String, BuildingTune> keySet: buildingTuneMap.entrySet()) {

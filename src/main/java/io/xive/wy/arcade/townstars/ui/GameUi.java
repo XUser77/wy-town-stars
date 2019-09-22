@@ -1,20 +1,31 @@
 package io.xive.wy.arcade.townstars.ui;
 
+import io.xive.wy.arcade.townstars.exceptions.GameException;
 import io.xive.wy.arcade.townstars.game.Building;
+import io.xive.wy.arcade.townstars.game.BuildingTune;
 import io.xive.wy.arcade.townstars.game.Game;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 public class GameUi extends JFrame {
 
-  public static void main(String[]args) {
+  public static void main(String[]args)
+      throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     GameUi gameUi = new GameUi();
     gameUi.setVisible(true);
   }
@@ -22,11 +33,12 @@ public class GameUi extends JFrame {
   public GameUi() {
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-    setSize(1100, 800);
+    int imageHeight = topLine + topLineMarginBottom + 16 * (fieldSize + borderWidth) + borderWidth + paddingY * 2;
+
+    setSize(1100, imageHeight + 100);
     setTitle("WY - Town stars");
 
-    bufferedImage = new BufferedImage(paddingX * 2 + 16 * (fieldSize + borderWidth) + borderWidth,
-                                      topLine + topLineMarginBottom + 16 * (fieldSize + borderWidth) + borderWidth + paddingY * 2,
+    bufferedImage = new BufferedImage(paddingX * 2 + 16 * (fieldSize + borderWidth) + borderWidth, imageHeight,
                                       BufferedImage.TYPE_INT_ARGB);
 
     game = new Game();
@@ -37,14 +49,82 @@ public class GameUi extends JFrame {
       while (!game.isFinished()) {
         try {
           game.tick();
-          repaintImage();
-          repaint();
-          Thread.sleep(100);
+          repaintGame();
+          Thread.sleep(10);
         } catch (Exception e) {
           e.printStackTrace();
         }
       }
     }).start();
+
+    addMouseMotionListener(new MouseMotionListener() {
+      @Override
+      public void mouseDragged(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseMoved(MouseEvent e) {
+        int imX = e.getX() - (getWidth() / 2 - bufferedImage.getWidth() / 2);
+        int imY = e.getY() - 50;
+
+        if (imX > paddingX && imX < bufferedImage.getWidth() - paddingX &&
+            imY > topLine + topLineMarginBottom) {
+          mouseFieldX = (imX - paddingX - borderWidth) / (fieldSize + borderWidth);
+          mouseFieldY = (imY - topLine - topLineMarginBottom) / (fieldSize + borderWidth);
+          setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        } else {
+          mouseFieldX = -1;
+          mouseFieldY = -1;
+          setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        }
+
+      }
+    });
+
+    addMouseListener(new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        if (mouseFieldX != -1 && mouseFieldY != -1) {
+          Building building = game.getBuilding(mouseFieldY * 16 + mouseFieldX + 1);
+          if (building != null) {
+            BuildingActions buildingActions = new BuildingActions(building, GameUi.this);
+            buildingActions.setVisible(true);
+          } else {
+            BuildingSelector buildingSelector = new BuildingSelector(game.getAllBuildingTunes(), GameUi.this);
+            buildingSelector.setVisible(true);
+            BuildingTune buildingTune = buildingSelector.getSelectedBuildingTune();
+            if (buildingTune != null) {
+              try {
+                game.build(buildingTune.getName());
+              } catch (GameException ex) {
+                JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
+              }
+            }
+          }
+        }
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+
+      }
+    });
 
   }
 
@@ -53,14 +133,24 @@ public class GameUi extends JFrame {
   private int paddingY = 10;
   private int paddingX = 10;
 
-  int buildingFontSize = 18;
-  int topFontSize = 16;
+  private int buildingFontSize = 18;
+  private int topFontSize = 16;
 
   private int topLine = topFontSize * 4;
   private int topLineMarginBottom = buildingFontSize;
 
+  private int mouseFieldX = -1;
+  private int mouseFieldY = -1;
+
   private Game game;
-  private BufferedImage bufferedImage = new BufferedImage(1028, 768, BufferedImage.TYPE_INT_ARGB);
+  private final BufferedImage bufferedImage;
+
+  private void repaintGame() {
+    synchronized (bufferedImage) {
+      repaintImage();
+      repaint();
+    }
+  }
 
   private String getTimeString(long timestamp) {
     long hours = timestamp / (60 * 60 * 1000);
@@ -133,6 +223,13 @@ public class GameUi extends JFrame {
         g.setColor(Color.BLACK);
         g.drawString(name, paddingX + borderWidth + fieldSize / 2 + x * (fieldSize + borderWidth) - w / 2,
                      fieldSize / 2 + buildingFontSize / 2 - 2 + topOffset + borderWidth + y * (fieldSize + borderWidth));
+      }
+
+      if (mouseFieldX == x && mouseFieldY == y) {
+        g.setColor(new Color(0, 0, 0, 127));
+        g.fillRect(paddingX + borderWidth + x * (fieldSize + borderWidth),
+                   topOffset + borderWidth + y * (fieldSize + borderWidth),
+                   fieldSize, fieldSize);
       }
 
     }
