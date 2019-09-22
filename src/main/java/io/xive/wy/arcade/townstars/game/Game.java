@@ -300,7 +300,9 @@ public class Game {
     popOutputBuilding(fromBuilding, newCraft, 1);
 
     if (toBuilding.getStorageCapacity() > 0) {
-      for(int i=0; i<amount; i++) toBuilding.storedCrafts.add(craftTune.newCraft());
+      for (int i = 0; i < amount; i++) toBuilding.storedCrafts.add(craftTune.newCraft());
+    } else if (toBuilding.isTradeDepot()) {
+      for (int i = 0; i < amount; i++) tradeCrafts.add(craftTune.newCraft());
     } else {
       for(int i=0; i<amount; i++) toBuilding.craftsInside.add(craftTune.newCraft());
     }

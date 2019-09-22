@@ -18,11 +18,16 @@ public class BuildingActions extends JDialog {
 
   public static final String ACTION_CRAFT = "craft";
   public static final String ACTION_SELL = "sell";
+  public static final String ACTION_STORE = "store";
+  public static final String ACTION_CONSUME = "consume";
 
   public String craft = null;
+  public int storeIndex = -1;
   public String action = null;
+  private Building[] buildings;
 
-  public BuildingActions(Building building, JFrame parent, long gameDate) {
+  public BuildingActions(Building[] buildings, Building building, JFrame parent, long gameDate) {
+    this.buildings = buildings;
     setTitle("Building: " + building.getName());
     setLayout(new java.awt.GridLayout(0, 1));
     setModal(true);
@@ -30,8 +35,13 @@ public class BuildingActions extends JDialog {
 
     if (building.getStorageCapacity() > 0) {
       add(new JLabel("Storage for " + String.join(",", building.getStoresCraftTypes())));
-      add(new JLabel("Stored: " + groupCrafts(building.getStoredCrafts())));
+      add(new JLabel("Stored: " + GameUi.groupCrafts(building.getStoredCrafts())));
       add(new JLabel("Usage: " + building.getStoredCrafts().length + " / " + building.getStorageCapacity()));
+      String[] uniqueCrafts = getUniqueCrafts(building.getStoredCrafts());
+      for(int i=0; i<uniqueCrafts.length; i++) {
+        add(storeButton(uniqueCrafts[i]));
+        add(consumeButton(uniqueCrafts[i]));
+      }
     } else if (building.isTradeDepot()) {
       add(new JLabel("Trade depot"));
     } else {
@@ -41,15 +51,17 @@ public class BuildingActions extends JDialog {
         add(new JLabel((Game.BUILDING_CRAFT_PERIOD - (gameDate - building.getCraftStartDate())) / 1000 + " seconds left"));
       } else if (building.getCraftOutside() != null) {
         add(new JLabel("Produced " + building.getCraftOutside().getName()));
+        add(storeButton(building.getCraftOutside().getName()));
+        add(consumeButton(building.getCraftOutside().getName()));
       } else {
         add(new JLabel("Free"));
         if (building.getCraftsInside().length > 0) {
-          add(new JLabel("Contains: " + groupCrafts(building.getCraftsInside())));
+          add(new JLabel("Contains: " + GameUi.groupCrafts(building.getCraftsInside())));
         } else {
           add(new JLabel("Empty"));
-          for(int i=0; i<building.getProducesCrafts().length; i++) {
-            add(craftButton(building.getProducesCrafts()[i]));
-          }
+        }
+        for(int i=0; i<building.getProducesCrafts().length; i++) {
+          add(craftButton(building.getProducesCrafts()[i]));
         }
       }
 
@@ -65,6 +77,31 @@ public class BuildingActions extends JDialog {
 
   }
 
+  private JButton storeButton(String craftName) {
+    JButton jButton = new JButton("Store " + craftName);
+    jButton.addActionListener(l -> {
+      BuildingsList buildingsList = new BuildingsList(buildings, this);
+      buildingsList.setVisible(true);
+      if (buildingsList.index != -1) {
+        action = ACTION_STORE;
+        craft = craftName;
+        storeIndex = buildingsList.index;
+        setVisible(false);
+      }
+    });
+    return jButton;
+  }
+
+  private JButton consumeButton(String craftName) {
+    JButton jButton = new JButton("Consume " + craftName);
+    jButton.addActionListener(l -> {
+      action = ACTION_CONSUME;
+      craft = craftName;
+      setVisible(false);
+    });
+    return jButton;
+  }
+
   private JButton craftButton(String craftName) {
     JButton jButton = new JButton("Craft: " + craftName);
     jButton.addActionListener(e -> {
@@ -75,18 +112,14 @@ public class BuildingActions extends JDialog {
     return jButton;
   }
 
-  private String groupCrafts(Craft[] crafts) {
-    Map<String, Integer> map = new HashMap<>();
+  private String[] getUniqueCrafts(Craft[] crafts) {
+    List<String> result = new ArrayList<>();
     for (Craft craft : crafts) {
-      map.put(craft.getName(), map.getOrDefault(craft.getName(), 0) + 1);
+      if (!result.contains(craft.getName())) result.add(craft.getName());
     }
-
-    List<String> results = new ArrayList<>();
-    for(Entry<String, Integer> entry: map.entrySet()) {
-      results.add(entry.getKey() + ": " + entry.getValue());
-    }
-    return String.join(", ", results);
-
+    return result.toArray(new String[0]);
   }
+
+
 
 }

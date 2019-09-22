@@ -3,6 +3,7 @@ package io.xive.wy.arcade.townstars.ui;
 import io.xive.wy.arcade.townstars.exceptions.GameException;
 import io.xive.wy.arcade.townstars.game.Building;
 import io.xive.wy.arcade.townstars.game.BuildingTune;
+import io.xive.wy.arcade.townstars.game.Craft;
 import io.xive.wy.arcade.townstars.game.Game;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -15,6 +16,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -89,7 +95,7 @@ public class GameUi extends JFrame {
           int index = mouseFieldY * 16 + mouseFieldX + 1;
           Building building = game.getBuilding(index);
           if (building != null) {
-            BuildingActions buildingActions = new BuildingActions(building, GameUi.this, game.getGameDate());
+            BuildingActions buildingActions = new BuildingActions(game.getBuildings(), building, GameUi.this, game.getGameDate());
             buildingActions.setVisible(true);
             if (BuildingActions.ACTION_CRAFT.equals(buildingActions.action)) {
               try {
@@ -100,6 +106,18 @@ public class GameUi extends JFrame {
             } else if (BuildingActions.ACTION_SELL.equals(buildingActions.action)) {
               try {
                 game.sell(index);
+              } catch (GameException ex) {
+                JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
+              }
+            } else if (BuildingActions.ACTION_STORE.equals(buildingActions.action)) {
+              try {
+                game.store(index, buildingActions.storeIndex, buildingActions.craft, 1);
+              } catch (GameException ex) {
+                JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
+              }
+            } else if (BuildingActions.ACTION_CONSUME.equals(buildingActions.action)) {
+              try {
+                game.consume(index, buildingActions.craft, 1);
               } catch (GameException ex) {
                 JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
               }
@@ -194,6 +212,10 @@ public class GameUi extends JFrame {
     String currency = "$ " + game.getCurrency();
     String points = game.getPoints() + " points";
     String timeString = getTimeString(game.getGameDate());
+    String waitingForTrade = "";
+    if (game.getTradeCrafts().length > 0) {
+      waitingForTrade = "In depot: " + groupCrafts(game.getTradeCrafts());
+    }
 
     g.setFont(new Font("Tahoma", Font.BOLD, topFontSize));
     g.drawString(currency, paddingX, topOffset + topFontSize);
@@ -201,6 +223,8 @@ public class GameUi extends JFrame {
 
     int pointsWidth = g.getFontMetrics().stringWidth(timeString);
     g.drawString(timeString, bufferedImage.getWidth() - paddingX - pointsWidth, topOffset + topFontSize);
+    int waitingWidth = g.getFontMetrics().stringWidth(waitingForTrade);
+    g.drawString(waitingForTrade, bufferedImage.getWidth() - paddingX - waitingWidth, (int)(topOffset + topFontSize * 2.5));
 
     topOffset += topFontSize * 4;
 
@@ -277,6 +301,20 @@ public class GameUi extends JFrame {
   public void paint(Graphics g) {
 
     g.drawImage(bufferedImage, getWidth() / 2 - bufferedImage.getWidth() / 2,50, null);
+  }
+
+  public static String groupCrafts(Craft[] crafts) {
+    Map<String, Integer> map = new HashMap<>();
+    for (Craft craft : crafts) {
+      map.put(craft.getName(), map.getOrDefault(craft.getName(), 0) + 1);
+    }
+
+    List<String> results = new ArrayList<>();
+    for(Entry<String, Integer> entry: map.entrySet()) {
+      results.add(entry.getKey() + ": " + entry.getValue());
+    }
+    return String.join(", ", results);
+
   }
 
 }
