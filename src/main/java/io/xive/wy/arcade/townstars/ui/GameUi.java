@@ -55,9 +55,10 @@ public class GameUi extends JFrame {
   public GameUi() throws IOException {
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+    jTopPanel = new JPanel();
+
     setLayout( new BorderLayout() );
-    JPanel jPanel = new JPanel();
-    jPanel.setLayout(new java.awt.GridLayout(1, 0));
+    jTopPanel.setLayout(new java.awt.GridLayout(1, 0));
 
     JButton jButton = new JButton("New game");
     jButton.addActionListener(e -> {
@@ -67,7 +68,7 @@ public class GameUi extends JFrame {
         JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
       }
     });
-    jPanel.add(jButton);
+    jTopPanel.add(jButton);
 
     jButton = new JButton("New auto game");
     jButton.addActionListener(e -> {
@@ -80,11 +81,11 @@ public class GameUi extends JFrame {
         ex.printStackTrace();
       }
     });
-    jPanel.add(jButton);
+    jTopPanel.add(jButton);
 
     jButton = new JButton("Import/check ledger");
     jButton.addActionListener(e -> importLedger());
-    jPanel.add(jButton);
+    jTopPanel.add(jButton);
 
     jButton = new JButton("Save ledger");
     jButton.addActionListener(e -> {
@@ -94,22 +95,25 @@ public class GameUi extends JFrame {
         e1.printStackTrace();
       }
     });
-    jPanel.add(jButton);
+    jTopPanel.add(jButton);
 
     jButton = new JButton("Skip 10 sec");
     jButton.addActionListener(e -> game.skip(10 * 1000));
-    jPanel.add(jButton);
+    jTopPanel.add(jButton);
 
     jButton = new JButton("Skip 60 sec");
     jButton.addActionListener(e -> game.skip(60 * 1000));
-    jPanel.add(jButton);
+    jTopPanel.add(jButton);
 
     jButton = new JButton("Skip 10 min");
     jButton.addActionListener(e -> game.skip(10 * 60 * 1000));
-    jPanel.add(jButton);
+    jTopPanel.add(jButton);
 
 
-    add(jPanel, BorderLayout.NORTH);
+    add(jTopPanel, BorderLayout.NORTH);
+
+    JGamePanel jGamePanel = new JGamePanel();
+    add(jGamePanel, BorderLayout.CENTER);
 
     int imageHeight = topLine + topLineMarginBottom + 16 * (fieldSize + borderWidth) + borderWidth + paddingY * 2;
 
@@ -136,7 +140,7 @@ public class GameUi extends JFrame {
       repaintGame();
     }).start();
 
-    addMouseMotionListener(new MouseMotionListener() {
+    jGamePanel.addMouseMotionListener(new MouseMotionListener() {
       @Override
       public void mouseDragged(MouseEvent e) {
 
@@ -161,7 +165,7 @@ public class GameUi extends JFrame {
       }
     });
 
-    addMouseListener(new MouseListener() {
+    jGamePanel.addMouseListener(new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {
         if (mouseFieldX != -1 && mouseFieldY != -1) {
@@ -251,10 +255,12 @@ public class GameUi extends JFrame {
   private int topLine = topFontSize * 4;
   private int topLineMarginBottom = buildingFontSize;
 
-  private int imageTopOffset = 100;
+  private int imageTopOffset = 0;
 
   private int mouseFieldX = -1;
   private int mouseFieldY = -1;
+
+  private JPanel jTopPanel;
 
   private Game game;
   private final BufferedImage bufferedImage;
@@ -448,12 +454,6 @@ public class GameUi extends JFrame {
 
   }
 
-  @Override
-  public void paint(Graphics g) {
-
-    g.drawImage(bufferedImage, getWidth() / 2 - bufferedImage.getWidth() / 2,imageTopOffset, null);
-  }
-
   public static String groupCrafts(Craft[] crafts) {
     Map<String, Integer> map = new HashMap<>();
     for (Craft craft : crafts) {
@@ -466,6 +466,14 @@ public class GameUi extends JFrame {
     }
     return String.join(", ", results);
 
+  }
+
+  private class JGamePanel extends JPanel {
+    @Override
+    public void paint(Graphics g) {
+      super.paint(g);
+      g.drawImage(bufferedImage, getWidth() / 2 - bufferedImage.getWidth() / 2,imageTopOffset, null);
+    }
   }
 
 }
