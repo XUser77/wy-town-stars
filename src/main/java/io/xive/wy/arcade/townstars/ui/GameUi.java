@@ -86,10 +86,24 @@ public class GameUi extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         if (mouseFieldX != -1 && mouseFieldY != -1) {
-          Building building = game.getBuilding(mouseFieldY * 16 + mouseFieldX + 1);
+          int index = mouseFieldY * 16 + mouseFieldX + 1;
+          Building building = game.getBuilding(index);
           if (building != null) {
-            BuildingActions buildingActions = new BuildingActions(building, GameUi.this);
+            BuildingActions buildingActions = new BuildingActions(building, GameUi.this, game.getGameDate());
             buildingActions.setVisible(true);
+            if (BuildingActions.ACTION_CRAFT.equals(buildingActions.action)) {
+              try {
+                game.craft(index, buildingActions.craft);
+              } catch (GameException ex) {
+                JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
+              }
+            } else if (BuildingActions.ACTION_SELL.equals(buildingActions.action)) {
+              try {
+                game.sell(index);
+              } catch (GameException ex) {
+                JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
+              }
+            }
           } else {
             BuildingSelector buildingSelector = new BuildingSelector(game.getAllBuildingTunes(), GameUi.this);
             buildingSelector.setVisible(true);
@@ -134,6 +148,7 @@ public class GameUi extends JFrame {
   private int paddingX = 10;
 
   private int buildingFontSize = 18;
+  private int buildingMiniFontSize = 12;
   private int topFontSize = 16;
 
   private int topLine = topFontSize * 4;
@@ -194,7 +209,6 @@ public class GameUi extends JFrame {
     g.fillRect(paddingX, topOffset,
                16 * (fieldSize + borderWidth) + borderWidth, 16 * (fieldSize + borderWidth) + borderWidth);
 
-    g.setFont(new Font("Tahoma", Font.BOLD, buildingFontSize));
 
     Building[] buildings = game.getBuildings();
     for(int i=1; i<buildings.length; i++) {
@@ -219,10 +233,33 @@ public class GameUi extends JFrame {
 
       if (buildings[i] != null) {
         String name = buildings[i].getShortName();
+        g.setFont(new Font("Tahoma", Font.BOLD, buildingFontSize));
         int w = g.getFontMetrics().stringWidth(name);
         g.setColor(Color.BLACK);
         g.drawString(name, paddingX + borderWidth + fieldSize / 2 + x * (fieldSize + borderWidth) - w / 2,
-                     fieldSize / 2 + buildingFontSize / 2 - 2 + topOffset + borderWidth + y * (fieldSize + borderWidth));
+                     fieldSize / 4 + buildingFontSize / 2 + topOffset + borderWidth + y * (fieldSize + borderWidth));
+
+        g.setFont(new Font("Tahoma", Font.PLAIN, buildingMiniFontSize));
+        String sub = "";
+        if (buildings[i].getStorageCapacity() > 0) {
+          sub = buildings[i].getStoredCrafts().length + "/" + buildings[i].getStorageCapacity();
+        } else if (buildings[i].isTradeDepot()) {
+
+        } else {
+          if (buildings[i].getCraftStartDate() != null) {
+            sub = (Game.BUILDING_CRAFT_PERIOD - (game.getGameDate() - buildings[i].getCraftStartDate())) / 1000 + " s.";
+          } else if (buildings[i].getCraftOutside() != null) {
+            sub = "ready";
+          } else {
+            sub = "free";
+          }
+        }
+
+        w = g.getFontMetrics().stringWidth(sub);
+        g.drawString(sub, paddingX + borderWidth + fieldSize / 2 + x * (fieldSize + borderWidth) - w / 2,
+                     fieldSize * 3 / 4 + buildingMiniFontSize / 2 + topOffset + borderWidth + y * (fieldSize + borderWidth));
+
+
       }
 
       if (mouseFieldX == x && mouseFieldY == y) {
