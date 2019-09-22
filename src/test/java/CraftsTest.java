@@ -204,6 +204,7 @@ public class CraftsTest {
     long spendCurrency = totalLabor * (game.getGameDate() / Game.BUILDING_LABOR_PERIOD);
 
     assertEquals(Game.START_CURRENCY - spendCurrency + craftPrice * 10, game.getCurrency());
+    assertEquals(craftPrice * 10 / 1000, game.getPoints());
     assertNull(game.getBuilding(3).getTradeCraft());
     assertNull(game.getBuilding(3).getTradeStartDate());
 

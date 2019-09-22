@@ -163,7 +163,7 @@ public class Game {
       if (buildings[i].tradeStartDate != null && gameDate - buildings[i].tradeStartDate >= BUILDING_TRADE_PERIOD) {
         synchronized (buildings[i]) {
           currency += buildings[i].tradeCraft.getCityPrice() * 10;
-          points += Math.min(1, buildings[i].tradeCraft.getCityPrice() * 10 / 1000);
+          points += Math.max(1, buildings[i].tradeCraft.getCityPrice() * 10 / 1000);
           buildings[i].tradeCraft = null;
           buildings[i].tradeStartDate = null;
         }

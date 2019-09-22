@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e2d0785-50c6-4be3-a342-2add3985c5bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Building.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/CraftsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CraftsTest.java" afterDir="false" />
     </list>
@@ -23,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="140" column="3" selection-start-line="140" selection-start-column="3" selection-end-line="140" selection-end-column="3" />
+            <state relative-caret-position="204">
+              <caret line="165" selection-start-line="165" selection-end-line="165" />
               <folding>
                 <element signature="e#4255#4256#0" expanded="true" />
                 <element signature="e#4319#4320#0" expanded="true" />
@@ -43,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/CraftsTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="207" column="56" lean-forward="true" selection-start-line="207" selection-start-column="56" selection-end-line="207" selection-end-column="56" />
+            <state relative-caret-position="257">
+              <caret line="206" column="32" selection-start-line="206" selection-start-column="32" selection-end-line="206" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -184,8 +182,8 @@
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Craft.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Building.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/exceptions/BuildingAlreadyTradingException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" />
         <option value="$PROJECT_DIR$/src/test/java/CraftsTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java" />
       </list>
     </option>
   </component>
@@ -277,7 +275,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569114674968" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569114830545" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -339,23 +337,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1569079533018</updated>
-      <workItem from="1569079542341" duration="21117000" />
+      <workItem from="1569079542341" duration="21272000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CraftsTest - 2019.09.21 at 16h 49m 00s.xml">
-      <configuration name="CraftsTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CraftsTest - 2019.09.21 at 16h 49m 15s.xml">
-      <configuration name="CraftsTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CraftsTest - 2019.09.21 at 16h 51m 29s.xml">
-      <configuration name="CraftsTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CraftsTest - 2019.09.21 at 16h 51m 46s.xml">
-      <configuration name="CraftsTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="CraftsTest - 2019.09.21 at 20h 00m 23s.xml">
       <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
@@ -374,9 +360,21 @@
     <history-entry file="CraftsTest - 2019.09.21 at 20h 10m 12s.xml">
       <configuration name="CraftsTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="CraftsTest - 2019.09.21 at 20h 11m 18s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CraftsTest - 2019.09.21 at 20h 12m 00s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CraftsTest - 2019.09.21 at 20h 12m 14s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CraftsTest - 2019.09.21 at 20h 13m 33s.xml">
+      <configuration name="CraftsTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21117000" />
+    <option name="totallyTimeSpent" value="21272000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -398,8 +396,8 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -697,10 +695,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/CraftsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="206" column="32" selection-start-line="206" selection-start-column="32" selection-end-line="206" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/xive/wy/arcade/townstars/game/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="140" column="3" selection-start-line="140" selection-start-column="3" selection-end-line="140" selection-end-column="3" />
+        <state relative-caret-position="204">
+          <caret line="165" selection-start-line="165" selection-end-line="165" />
           <folding>
             <element signature="e#4255#4256#0" expanded="true" />
             <element signature="e#4319#4320#0" expanded="true" />
@@ -711,16 +719,6 @@
             <element signature="e#4657#4658#0" expanded="true" />
             <element signature="e#4737#4738#0" expanded="true" />
             <element signature="e#4824#4825#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/CraftsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="207" column="56" lean-forward="true" selection-start-line="207" selection-start-column="56" selection-end-line="207" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
