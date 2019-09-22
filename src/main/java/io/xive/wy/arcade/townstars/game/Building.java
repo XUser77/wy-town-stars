@@ -34,6 +34,8 @@ public class Building {
   protected Craft tradeCraft;
   protected Long tradeStartDate;
 
+  private String shortName;
+
   protected Building(String name, long sellValue, long buildCost, long laborValue,
                   String[] producesCrafts, boolean hasRequirementsMet, String[] storesCraftTypes,
                   long storageCapacity, boolean isTradeDepot, long gameDate) {
@@ -64,6 +66,16 @@ public class Building {
     }
 
     this.lastLaborDate = gameDate;
+
+    this.shortName = "";
+    String[] ar = this.name.split(" ");
+    if (ar.length > 1) {
+      for (int i = 0; i < ar.length; i++) {
+        this.shortName += ar[i].substring(0, 1).toUpperCase();
+      }
+    } else {
+      this.shortName = this.name.substring(0, 2).toUpperCase();
+    }
 
   }
 
@@ -137,6 +149,10 @@ public class Building {
 
   public Long getTradeStartDate() {
     return tradeStartDate;
+  }
+
+  public String getShortName() {
+    return shortName;
   }
 
 }
