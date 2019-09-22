@@ -168,6 +168,8 @@ public class CraftsTest {
     game.consume(5, "Wheat", 10);
     assertEquals(10, game.getTradeCrafts().length);
 
+    assertEquals(8*5 + 1, game.compileLedger().split("\r\n").length);
+
 
   }
 
@@ -207,6 +209,8 @@ public class CraftsTest {
     assertEquals(craftPrice * 10 / 1000, game.getPoints());
     assertNull(game.getBuilding(3).getTradeCraft());
     assertNull(game.getBuilding(3).getTradeStartDate());
+
+    assertEquals(3, game.compileLedger().split("\r\n").length);
 
   }
 

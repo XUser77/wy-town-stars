@@ -17,7 +17,6 @@ import io.xive.wy.arcade.townstars.exceptions.OutputNotEmptyException;
 import io.xive.wy.arcade.townstars.exceptions.WrongCraftException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +41,8 @@ public class Game {
   private long skippedMs;
 
   private List<Craft> tradeCrafts;
+
+  private List<String> ledger;
 
   public Game() {
 
@@ -70,6 +71,8 @@ public class Game {
     for (int i=0; i<40; i++) {
       this.buildings[6].storedCrafts.add(objectsRepo.findCraftTune("Gasoline").newCraft());
     }
+
+    this.ledger = new ArrayList<>();
 
   }
 
@@ -101,6 +104,11 @@ public class Game {
     } else {
       building.craftOutside = null;
     }
+  }
+
+  private void logLedger(String action, String item, Integer from, Integer to, Integer amount) {
+    ledger.add(getGameDate() + "," + action + "," + item + "," +
+                   (from != null ? from : "") + "," + (to != null ? to : "") + "," + (amount != null ? amount : ""));
   }
 
   /*** Helpers ***/
@@ -138,6 +146,10 @@ public class Game {
 
   public Craft[] getTradeCrafts() {
     return tradeCrafts.toArray(new Craft[0]);
+  }
+
+  public String compileLedger() {
+    return String.join("\r\n", ledger);
   }
 
   public void tick() {
@@ -194,6 +206,8 @@ public class Game {
     currency -= buildingTune.getBuildCost();
     buildings[freeIndex] = newBuilding(buildingTune);
 
+    logLedger("BUILD", buildings[freeIndex].getName(), null, freeIndex, null);
+
     return freeIndex;
   }
 
@@ -202,8 +216,12 @@ public class Game {
     if (isFinished()) throw new GameFinishedException();
     if (buildings[buildingIndex] == null) throw new NoBuildingException();
 
+    Building building = buildings[buildingIndex];
+
     currency += buildings[buildingIndex].getSellValue();
     buildings[buildingIndex] = null;
+
+    logLedger("SELL", building.getName(), buildingIndex, null, null);
 
   }
 
@@ -251,6 +269,8 @@ public class Game {
     building.craftStartDate = getGameDate();
     building.crafting = newCraft;
 
+    logLedger("CRAFT", newCraft.getName(), null, buildingIndex, null);
+
   }
 
   public void store(int fromIndex, int toIndex, String craftName, int amount) throws GameException {
@@ -285,6 +305,8 @@ public class Game {
       for(int i=0; i<amount; i++) toBuilding.craftsInside.add(craftTune.newCraft());
     }
 
+    logLedger("STORE", newCraft.getName(), fromIndex, toIndex, null);
+
   }
 
   public void consume(int buildingIndex, String craftName, int amount) throws GameException {
@@ -304,6 +326,8 @@ public class Game {
     for(int i=0; i<amount; i++) {
       tradeCrafts.add(craftTune.newCraft());
     }
+
+    logLedger("CONSUME", newCraft.getName(), buildingIndex, null, amount);
 
   }
 
@@ -337,6 +361,8 @@ public class Game {
 
     building.tradeStartDate = getGameDate();
     building.tradeCraft = newCraft;
+
+    logLedger("TRADE", newCraft.getName(), buildingIndex, null, null);
 
   }
 
