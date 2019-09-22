@@ -8,6 +8,7 @@ import io.xive.wy.arcade.townstars.exceptions.BuildingAlreadyCraftingException;
 import io.xive.wy.arcade.townstars.exceptions.GameException;
 import io.xive.wy.arcade.townstars.exceptions.NotMeetRequirements;
 import io.xive.wy.arcade.townstars.exceptions.WrongCraftException;
+import java.io.IOException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,26 +19,26 @@ import static org.junit.Assert.assertSame;
 public class CraftsTest {
 
   @Test(expected = WrongCraftException.class)
-  public void testWrongCraft() throws GameException {
+  public void testWrongCraft() throws GameException, IOException {
     Game game = new Game();
     game.craft(4, "Wheat");
   }
 
   @Test(expected = NotMeetRequirements.class)
-  public void testNoReqCraft() throws GameException {
+  public void testNoReqCraft() throws GameException, IOException {
     Game game = new Game();
     game.craft(1, "Wheat");
   }
 
   @Test(expected = BuildingAlreadyCraftingException.class)
-  public void testAlreadyCrafting() throws GameException {
+  public void testAlreadyCrafting() throws GameException, IOException {
     Game game = new Game();
     game.craft(4, "Water");
     game.craft(4, "Water");
   }
 
   @Test(expected = OutputNotEmptyException.class)
-  public void testOutputNotEmpty() throws GameException {
+  public void testOutputNotEmpty() throws GameException, IOException {
     Game game = new Game();
     game.craft(4, "Water");
     game.skip(Game.BUILDING_CRAFT_PERIOD);
@@ -45,13 +46,13 @@ public class CraftsTest {
   }
 
   @Test(expected = NotEnoughCraftsException.class)
-  public void testStoreEmpty() throws GameException {
+  public void testStoreEmpty() throws GameException, IOException {
     Game game = new Game();
     game.store(4, 1, "Water", 1);
   }
 
   @Test(expected = NotEnoughCraftsException.class)
-  public void testStoreSingle() throws GameException {
+  public void testStoreSingle() throws GameException, IOException {
     Game game = new Game();
     game.craft(4, "Water");
     assertNull(game.getBuilding(4).getCraftOutside());
@@ -66,7 +67,7 @@ public class CraftsTest {
   }
 
   @Test(expected = InvalidStorageException.class)
-  public void testInvalidStorage() throws GameException {
+  public void testInvalidStorage() throws GameException, IOException {
     Game game = new Game();
     game.craft(4, "Water");
     assertNull(game.getBuilding(4).getCraftOutside());
@@ -81,7 +82,7 @@ public class CraftsTest {
   }
 
   @Test
-  public void testCraft() throws GameException {
+  public void testCraft() throws GameException, IOException {
     Game game = new Game();
     game.craft(4, "Water");
     assertNull(game.getBuilding(4).getCraftOutside());
@@ -114,7 +115,7 @@ public class CraftsTest {
   }
 
   @Test(expected = NotEnoughCraftsException.class)
-  public void testConsumeNotEnough() throws GameException {
+  public void testConsumeNotEnough() throws GameException, IOException {
     Game game = new Game();
     game.craft(4, "Water");
     assertNull(game.getBuilding(4).getCraftOutside());
@@ -129,7 +130,7 @@ public class CraftsTest {
   }
 
   @Test(expected = NotEnoughCraftsException.class)
-  public void testConsumeNotEnough2() throws GameException {
+  public void testConsumeNotEnough2() throws GameException, IOException {
     Game game = new Game();
 
     game.consume(5, "Wheat", 10);
@@ -137,7 +138,7 @@ public class CraftsTest {
   }
 
   @Test
-  public void testConsume() throws GameException {
+  public void testConsume() throws GameException, IOException {
     Game game = new Game();
 
     for (int i=0; i<5; i++) {
@@ -174,7 +175,7 @@ public class CraftsTest {
   }
 
   @Test(expected = NotEnoughCraftsException.class)
-  public void testTradeNotEnough2() throws GameException {
+  public void testTradeNotEnough2() throws GameException, IOException {
     Game game = new Game();
 
     game.consume(5, "Wheat", 5);
@@ -183,7 +184,7 @@ public class CraftsTest {
   }
 
   @Test
-  public void testTrade() throws GameException {
+  public void testTrade() throws GameException, IOException {
     Game game = new Game();
 
     game.consume(5, "Wheat", 10);

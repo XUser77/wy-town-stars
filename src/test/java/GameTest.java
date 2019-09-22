@@ -4,6 +4,7 @@ import io.xive.wy.arcade.townstars.exceptions.GameFinishedException;
 import io.xive.wy.arcade.townstars.exceptions.NotEnoughtCurrencyException;
 import io.xive.wy.arcade.townstars.game.Building;
 import io.xive.wy.arcade.townstars.game.BuildingTune;
+import java.io.IOException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 public class GameTest {
 
   @Test
-  public void testStartItems() {
+  public void testStartItems() throws IOException {
     Game game = new Game();
 
     assertEquals(25000, game.getCurrency());
@@ -35,7 +36,7 @@ public class GameTest {
   }
 
   @Test
-  public void testBuyAndSellCurrency() throws GameException {
+  public void testBuyAndSellCurrency() throws GameException, IOException {
     Game game = new Game();
     assertEquals(Game.START_CURRENCY, game.getCurrency());
 
@@ -59,7 +60,7 @@ public class GameTest {
   }
 
   @Test(expected = NotEnoughtCurrencyException.class)
-  public void testNotEnoughMoney() throws GameException {
+  public void testNotEnoughMoney() throws GameException, IOException {
     Game game = new Game();
     assertEquals(Game.START_CURRENCY, game.getCurrency());
 
@@ -78,7 +79,7 @@ public class GameTest {
   }
 
   @Test(expected = GameFinishedException.class)
-  public void checkGameFinish() throws GameException {
+  public void checkGameFinish() throws GameException, IOException {
     Game game = new Game();
 
     game.skip(Game.GAME_DURATION);
@@ -98,7 +99,7 @@ public class GameTest {
   }
 
   @Test
-  public void testGameTick() throws GameException {
+  public void testGameTick() throws GameException, IOException {
     Game game = new Game();
 
     assertEquals(Game.START_CURRENCY, game.getCurrency());

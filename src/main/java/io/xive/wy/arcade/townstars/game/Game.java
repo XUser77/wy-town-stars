@@ -283,33 +283,38 @@ public class Game {
     Building fromBuilding = getBuilding(fromIndex);
     if (fromBuilding == null) throw new BuildingNotFoundException();
 
-    Building toBuilding = getBuilding(toIndex);
-    if (toBuilding == null) throw new BuildingNotFoundException();
-
     CraftTune craftTune = objectsRepo.findCraftTune(craftName);
     if (craftTune == null) throw new CraftNotFoundException();
     Craft newCraft = craftTune.newCraft();
 
-    checkOutputBuilding(fromBuilding, newCraft, amount);
+    Building toBuilding = null;
 
-    if (toBuilding.getStorageCapacity() > 0) {
-      if (!Arrays.asList(toBuilding.getStoresCraftTypes()).contains(craftTune.getType()) &&
-          !Arrays.asList(toBuilding.getStoresCraftTypes()).contains(craftTune.getName())) {
-        throw new InvalidStorageException();
-      }
-      if (toBuilding.storedCrafts.size() + amount > toBuilding.getStorageCapacity()) {
-        throw new NotEnoughSpaceException();
+    if (toIndex != 0) {
+      toBuilding = getBuilding(toIndex);
+      if (toBuilding == null) throw new BuildingNotFoundException();
+      checkOutputBuilding(fromBuilding, newCraft, amount);
+
+      if (toBuilding.getStorageCapacity() > 0) {
+        if (!Arrays.asList(toBuilding.getStoresCraftTypes()).contains(craftTune.getType()) &&
+            !Arrays.asList(toBuilding.getStoresCraftTypes()).contains(craftTune.getName())) {
+          throw new InvalidStorageException();
+        }
+        if (toBuilding.storedCrafts.size() + amount > toBuilding.getStorageCapacity()) {
+          throw new NotEnoughSpaceException();
+        }
       }
     }
 
     popOutputBuilding(fromBuilding, newCraft, 1);
 
-    if (toBuilding.getStorageCapacity() > 0) {
-      for (int i = 0; i < amount; i++) toBuilding.storedCrafts.add(craftTune.newCraft());
-    } else if (toBuilding.isTradeDepot()) {
-      for (int i = 0; i < amount; i++) tradeCrafts.add(craftTune.newCraft());
-    } else {
-      for(int i=0; i<amount; i++) toBuilding.craftsInside.add(craftTune.newCraft());
+    if (toIndex != 0) {
+      if (toBuilding.getStorageCapacity() > 0) {
+        for (int i = 0; i < amount; i++) toBuilding.storedCrafts.add(craftTune.newCraft());
+      } else if (toBuilding.isTradeDepot()) {
+        for (int i = 0; i < amount; i++) tradeCrafts.add(craftTune.newCraft());
+      } else {
+        for (int i = 0; i < amount; i++) toBuilding.craftsInside.add(craftTune.newCraft());
+      }
     }
 
     logLedger("STORE", newCraft.getName(), fromIndex, toIndex, null);

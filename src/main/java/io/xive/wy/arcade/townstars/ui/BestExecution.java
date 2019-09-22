@@ -128,6 +128,26 @@ public class BestExecution {
       game.tick();
     }
 
+    for(int i=0; i<60; i++) {
+      wells.add(game.build("Well"));
+    }
+
+    for(int i=0; i<20; i++) {
+      wheatFields.add(game.build("Wheat Field"));
+    }
+
+    for(int i=0; i<4; i++) {
+      troughs.add(game.build("Trough"));
+    }
+
+    for(int k=0; k<190; k++) {
+      generateWater();
+      generateAndSellFeeds();
+      produceGasoline();
+      game.skip(Game.BUILDING_CRAFT_PERIOD);
+      game.tick();
+    }
+
   }
 
   private void produceGasoline() throws GameException {
@@ -173,7 +193,12 @@ public class BestExecution {
 
     for(int i=0; i<gasolineRefineres.size(); i++) {
       if (game.getBuilding(gasolineRefineres.get(i)).getCraftOutside() != null) {
-        game.store(gasolineRefineres.get(i), 6, "Gasoline", 1);
+        if (game.getBuilding(6).getStoredCrafts().length >= game.getBuilding(6).getStorageCapacity()) {
+          game.store(gasolineRefineres.get(i), 0, "Gasoline", 1);
+        } else {
+          game.store(gasolineRefineres.get(i), 6, "Gasoline", 1);
+        }
+
       }
 
       if (game.getBuilding(gasolineRefineres.get(i)).getCraftsInside().length >= 6) {
