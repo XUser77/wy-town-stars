@@ -46,13 +46,13 @@ import javax.swing.WindowConstants;
 public class GameUi extends JFrame {
 
   public static void main(String[]args)
-      throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+      throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, IOException {
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     GameUi gameUi = new GameUi();
     gameUi.setVisible(true);
   }
 
-  public GameUi() {
+  public GameUi() throws IOException {
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     setLayout( new BorderLayout() );
@@ -60,7 +60,13 @@ public class GameUi extends JFrame {
     jPanel.setLayout(new java.awt.GridLayout(1, 0));
 
     JButton jButton = new JButton("New game");
-    jButton.addActionListener(e -> newGame());
+    jButton.addActionListener(e -> {
+      try {
+        newGame();
+      } catch (IOException ex) {
+        JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
+      }
+    });
     jPanel.add(jButton);
 
     jButton = new JButton("Import/check ledger");
@@ -310,7 +316,7 @@ public class GameUi extends JFrame {
     }
   }
 
-  private void newGame() {
+  private void newGame() throws IOException {
     game = new Game();
   }
 

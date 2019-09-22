@@ -15,6 +15,7 @@ import io.xive.wy.arcade.townstars.exceptions.NotEnoughtCurrencyException;
 import io.xive.wy.arcade.townstars.exceptions.NotMeetRequirements;
 import io.xive.wy.arcade.townstars.exceptions.OutputNotEmptyException;
 import io.xive.wy.arcade.townstars.exceptions.WrongCraftException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,7 +45,7 @@ public class Game {
 
   private List<String> ledger;
 
-  public Game() {
+  public Game() throws IOException {
 
     this.objectsRepo = new ObjectsRepo();
 
