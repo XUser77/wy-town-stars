@@ -69,6 +69,19 @@ public class GameUi extends JFrame {
     });
     jPanel.add(jButton);
 
+    jButton = new JButton("New auto game");
+    jButton.addActionListener(e -> {
+      try {
+        newGame();
+        BestExecution bestExecution = new BestExecution();
+        bestExecution.execute(game);
+      } catch (Exception ex) {
+        JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
+        ex.printStackTrace();
+      }
+    });
+    jPanel.add(jButton);
+
     jButton = new JButton("Import/check ledger");
     jButton.addActionListener(e -> importLedger());
     jPanel.add(jButton);
