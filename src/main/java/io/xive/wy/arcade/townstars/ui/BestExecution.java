@@ -10,8 +10,14 @@ public class BestExecution {
   private Game game;
   private List<Integer> wells = new ArrayList<>();
   private List<Integer> wheatFields = new ArrayList<>();
-  private List<Integer> tradeDepos = new ArrayList<>();
+  private List<Integer> tradeDepots = new ArrayList<>();
   private List<Integer> troughs = new ArrayList<>();
+
+  private List<Integer> oilPumps = new ArrayList<>();
+  private List<Integer> petroliumRefineres = new ArrayList<>();
+  private List<Integer> gasolineRefineres = new ArrayList<>();
+  private List<Integer> refWells = new ArrayList<>();
+  private List<Integer> windTurbines = new ArrayList<>();
 
 
   public void execute(Game game) throws GameException {
@@ -19,7 +25,7 @@ public class BestExecution {
     // 25000
 
     wells.add(4);
-    tradeDepos.add(3);
+    tradeDepots.add(3);
 
     for(int i=0; i<14; i++) {
       wells.add(game.build("Well"));
@@ -49,7 +55,7 @@ public class BestExecution {
       wheatFields.add(game.build("Wheat Field"));
     }
 
-    tradeDepos.add(game.build("Trade Depot"));
+    tradeDepots.add(game.build("Trade Depot"));
 
     for(int k=0; k<20; k++) {
       generateWater();
@@ -84,13 +90,95 @@ public class BestExecution {
       troughs.add(game.build("Trough"));
     }
 
-    tradeDepos.add(game.build("Trade Depot"));
+    tradeDepots.add(game.build("Trade Depot"));
 
     for(int k=0; k<20; k++) {
       generateWater();
       generateAndSellFeeds();
       game.skip(Game.BUILDING_CRAFT_PERIOD);
       game.tick();
+    }
+    // 1 hour 20 minutes
+
+    for(int i=0; i<2; i++) {
+      oilPumps.add(game.build("Oil Pump"));
+    }
+
+    for(int i=0; i<5; i++) {
+      refWells.add(game.build("Well"));
+    }
+
+    for(int i=0; i<3; i++) {
+      windTurbines.add(game.build("Wind Turbine"));
+    }
+
+    for(int i=0; i<1; i++) {
+      petroliumRefineres.add(game.build("Refinery"));
+    }
+
+    for(int i=0; i<1; i++) {
+      gasolineRefineres.add(game.build("Refinery"));
+    }
+
+    for(int k=0; k<22; k++) {
+      generateWater();
+      generateAndSellFeeds();
+      produceGasoline();
+      game.skip(Game.BUILDING_CRAFT_PERIOD);
+      game.tick();
+    }
+
+  }
+
+  private void produceGasoline() throws GameException {
+    for(int i=0; i<windTurbines.size(); i++) {
+      if (game.getBuilding(windTurbines.get(i)).getCraftOutside() != null) {
+        if (i < 2) {
+          game.store(windTurbines.get(i), petroliumRefineres.get(0), "Energy", 1);
+        } else {
+          game.store(windTurbines.get(i), gasolineRefineres.get(0), "Energy", 1);
+        }
+      }
+
+      game.craft(windTurbines.get(i), "Energy");
+
+    }
+
+    for(int i=0; i<oilPumps.size(); i++) {
+      if (game.getBuilding(oilPumps.get(i)).getCraftOutside() != null) {
+        game.store(oilPumps.get(i), petroliumRefineres.get(i /2), "Crude Oil", 1);
+      }
+      game.craft(oilPumps.get(i), "Crude Oil");
+    }
+
+    for(int i=0; i<refWells.size(); i++) {
+      if (game.getBuilding(refWells.get(i)).getCraftOutside() != null) {
+        if (i == 0) {
+          game.store(refWells.get(i), petroliumRefineres.get(0), "Water", 1);
+        } else {
+          game.store(refWells.get(i), gasolineRefineres.get(0), "Water", 1);
+        }
+      }
+      game.craft(refWells.get(i), "Water");
+    }
+
+    for(int i=0; i<petroliumRefineres.size(); i++) {
+      if (game.getBuilding(petroliumRefineres.get(i)).getCraftOutside() != null) {
+        game.store(petroliumRefineres.get(i), gasolineRefineres.get(0), "Petroleum", 1);
+      }
+      if (game.getBuilding(petroliumRefineres.get(i)).getCraftsInside().length >= 4) {
+        game.craft(petroliumRefineres.get(i), "Petroleum");
+      }
+    }
+
+    for(int i=0; i<gasolineRefineres.size(); i++) {
+      if (game.getBuilding(gasolineRefineres.get(i)).getCraftOutside() != null) {
+        game.store(gasolineRefineres.get(i), 6, "Gasoline", 1);
+      }
+
+      if (game.getBuilding(gasolineRefineres.get(i)).getCraftsInside().length >= 6) {
+        game.craft(gasolineRefineres.get(i), "Gasoline");
+      }
     }
 
   }
@@ -122,10 +210,10 @@ public class BestExecution {
 
   private void checkTrade(String craftName) throws GameException {
     if (game.getTradeCrafts().length >= 10) {
-      for(int i=0; i<tradeDepos.size(); i++) {
-        if (game.getBuilding(tradeDepos.get(i)).getTradeStartDate() == null) {
+      for(int i = 0; i< tradeDepots.size(); i++) {
+        if (game.getBuilding(tradeDepots.get(i)).getTradeStartDate() == null) {
           game.consume(6, "Gasoline", 1);
-          game.trade(tradeDepos.get(i), craftName);
+          game.trade(tradeDepots.get(i), craftName);
           break;
         }
       }
