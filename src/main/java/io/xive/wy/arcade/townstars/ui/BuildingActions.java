@@ -5,6 +5,7 @@ import io.xive.wy.arcade.townstars.game.BuildingTune;
 import io.xive.wy.arcade.townstars.game.Craft;
 import io.xive.wy.arcade.townstars.game.Game;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,13 +21,14 @@ public class BuildingActions extends JDialog {
   public static final String ACTION_SELL = "sell";
   public static final String ACTION_STORE = "store";
   public static final String ACTION_CONSUME = "consume";
+  public static final String ACTION_TRADE = "trade";
 
   public String craft = null;
   public int storeIndex = -1;
   public String action = null;
   private Building[] buildings;
 
-  public BuildingActions(Building[] buildings, Building building, JFrame parent, long gameDate) {
+  public BuildingActions(Building[] buildings, Building building, JFrame parent, long gameDate, Craft[] depotCrafts) {
     this.buildings = buildings;
     setTitle("Building: " + building.getName());
     setLayout(new java.awt.GridLayout(0, 1));
@@ -44,6 +46,29 @@ public class BuildingActions extends JDialog {
       }
     } else if (building.isTradeDepot()) {
       add(new JLabel("Trade depot"));
+      if (building.getTradeStartDate() != null) {
+        add(new JLabel("Trading " + building.getTradeCraft().getName()));
+        add(new JLabel((Game.BUILDING_TRADE_PERIOD - (gameDate - building.getTradeStartDate())) / 1000 + " sec. left"));
+      } else {
+        if (depotCrafts.length > 0) {
+          add(new JLabel("Items for depot: " + GameUi.groupCrafts(depotCrafts)));
+          boolean isGasoline = false;
+          for (int i = 0; i < depotCrafts.length; i++) {
+            if (depotCrafts[i].getName().equals("Gasoline")) {
+              isGasoline = true;
+              break;
+            }
+          }
+          if (isGasoline) {
+            String[] crafts = getUniqueCrafts(depotCrafts);
+            for (int i = 0; i < crafts.length; i++) {
+              add(tradeButton(crafts[i]));
+            }
+          }
+        } else {
+          add(new JLabel("Empty"));
+        }
+      }
     } else {
       add(new JLabel("Can produce: " + String.join(", ", building.getProducesCrafts())));
       if (building.getCrafting() != null) {
@@ -75,6 +100,16 @@ public class BuildingActions extends JDialog {
 
     pack();
 
+  }
+
+  private JButton tradeButton(String craftName) {
+    JButton jButton = new JButton("Trade " + craftName);
+    jButton.addActionListener(l -> {
+      action = ACTION_TRADE;
+      craft = craftName;
+      setVisible(false);
+    });
+    return jButton;
   }
 
   private JButton storeButton(String craftName) {

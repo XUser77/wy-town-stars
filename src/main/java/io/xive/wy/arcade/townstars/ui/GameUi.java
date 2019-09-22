@@ -95,7 +95,7 @@ public class GameUi extends JFrame {
           int index = mouseFieldY * 16 + mouseFieldX + 1;
           Building building = game.getBuilding(index);
           if (building != null) {
-            BuildingActions buildingActions = new BuildingActions(game.getBuildings(), building, GameUi.this, game.getGameDate());
+            BuildingActions buildingActions = new BuildingActions(game.getBuildings(), building, GameUi.this, game.getGameDate(), game.getTradeCrafts());
             buildingActions.setVisible(true);
             if (BuildingActions.ACTION_CRAFT.equals(buildingActions.action)) {
               try {
@@ -118,6 +118,12 @@ public class GameUi extends JFrame {
             } else if (BuildingActions.ACTION_CONSUME.equals(buildingActions.action)) {
               try {
                 game.consume(index, buildingActions.craft, 1);
+              } catch (GameException ex) {
+                JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
+              }
+            } else if (BuildingActions.ACTION_TRADE.equals(buildingActions.action)) {
+              try {
+                game.trade(index, buildingActions.craft);
               } catch (GameException ex) {
                 JOptionPane.showMessageDialog(GameUi.this, "Error: " + ex.getMessage());
               }
@@ -268,7 +274,10 @@ public class GameUi extends JFrame {
         if (buildings[i].getStorageCapacity() > 0) {
           sub = buildings[i].getStoredCrafts().length + "/" + buildings[i].getStorageCapacity();
         } else if (buildings[i].isTradeDepot()) {
-
+          sub = "free";
+          if (buildings[i].getTradeStartDate() != null) {
+            sub = (Game.BUILDING_TRADE_PERIOD - (game.getGameDate() - buildings[i].getTradeStartDate())) / 1000 + " s.";
+          }
         } else {
           if (buildings[i].getCraftStartDate() != null) {
             sub = (Game.BUILDING_CRAFT_PERIOD - (game.getGameDate() - buildings[i].getCraftStartDate())) / 1000 + " s.";
